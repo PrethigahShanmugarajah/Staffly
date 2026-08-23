@@ -1,10 +1,11 @@
 // Client / src / App.jsx
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
-    <div>
-      <h1>App</h1>
-    </div>
+    <>
+      <Toaster />
+    </>
   );
 };
 
