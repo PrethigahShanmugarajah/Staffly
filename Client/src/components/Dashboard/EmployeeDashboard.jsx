@@ -8,7 +8,7 @@ import {
 import { useAppContext } from "../../context/appContext";
 import { Link } from "react-router-dom";
 import DashboardCard from "./DashboardCard";
-import DashboardHeader from "./DashboardHeader";
+import PageHeader from "../PageHeader";
 
 const EmployeeDashboard = ({ data }) => {
   const emp = data.employee;
@@ -47,7 +47,7 @@ const EmployeeDashboard = ({ data }) => {
         </p>
       </div> */}
 
-      <DashboardHeader
+      <PageHeader
         title={`Welcome, ${emp?.firstName}!`}
         subtitle={`${emp?.position} - ${emp?.department || "No Department"}`}
       />
