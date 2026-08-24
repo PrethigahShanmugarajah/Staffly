@@ -1,0 +1,84 @@
+// Client / src / components / Dashboard / AdminDashboard.jsx
+import {
+  Building2Icon,
+  CalendarIcon,
+  FileTextIcon,
+  UsersIcon,
+} from "lucide-react";
+import DashboardCard from "./DashboardCard";
+import DashboardHeader from "./DashboardHeader";
+
+const AdminDashboard = ({ data }) => {
+  const stats = [
+    {
+      icon: UsersIcon,
+      value: data.totalEmployees,
+      label: "Total Employees",
+      description: "Active workforce",
+    },
+    {
+      icon: Building2Icon,
+      value: data.totalDepartments,
+      label: "Departments",
+      description: "Organization units",
+    },
+    {
+      icon: CalendarIcon,
+      value: data.todayAttendance,
+      label: "Today's Attendance",
+      description: "Checked in today",
+    },
+    {
+      icon: FileTextIcon,
+      value: data.pendingLeaves,
+      label: "Pending Leaves",
+      description: "Awaiting approval",
+    },
+  ];
+  return (
+    <div className="animate-fade-in">
+      {/* <div className="page-header">
+        <h1 className="page-title">Dashboard</h1>
+
+        <p className="page-subtitle">
+          Welcome back, Admin - here's your overview
+        </p>
+      </div> */}
+
+      <DashboardHeader
+        title="Dashboard"
+        subtitle="Welcome back, Admin - here's your overview"
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-8">
+        {/* {stats.map((s) => (
+          <div
+            key={s.label}
+            className="card card-hover p-5 sm:p-6 relative overflow-hidden group flex items-center justify-between cursor-pointer"
+          >
+            <div>
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-gray-500/70 group-hover:bg-teal-500/70" />
+
+              <p className="text-sm font-medium text-gray-700">{s.label}</p>
+
+              <p className="text-2xl font-bold text-gray-900 mt-1">{s.value}</p>
+            </div>
+
+            <s.icon className="size-10 p-2.5 rounded-lg bg-gray-100 text-gray-600 group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors duration-200" />
+          </div>
+        ))} */}
+
+        {stats.map((s) => (
+          <DashboardCard
+            key={s.label}
+            icon={s.icon}
+            value={s.value}
+            title={s.label}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default AdminDashboard;
