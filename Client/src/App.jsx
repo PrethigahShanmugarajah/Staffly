@@ -1,8 +1,10 @@
 // Client / src / App.jsx
 import { Toaster } from "react-hot-toast";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LoginLanding from "./pages/LoginLanding";
 import LoginForm from "./components/Login/LoginForm";
+import Layout from "./pages/Layout";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
@@ -30,6 +32,12 @@ const App = () => {
             />
           }
         />
+
+        <Route element={<Layout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </>
   );
