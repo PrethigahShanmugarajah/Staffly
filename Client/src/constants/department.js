@@ -1,0 +1,14 @@
+// Client / src / constants / department.js
+
+export const DEPARTMENTS = [
+  "Engineering",
+  "Human Resources",
+  "Marketing",
+  "Sales",
+  "Finance",
+  "Operations",
+  "IT Support",
+  "Customer Success",
+  "Product Management",
+  "Design",
+];
