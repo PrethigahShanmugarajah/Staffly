@@ -43,7 +43,7 @@ const Button = ({
 
   const variants = {
     primary: `${selectedColor.bg} ${selectedColor.border} ${selectedColor.hoverBg} text-white`,
-    secondary: "bg-white text-black border-gray-200 hover:bg-gray-100",
+    secondary: "bg-white text-black border border-gray-300 hover:bg-gray-100",
     ghost: "bg-transparent border-transparent text-black hover:text-gray-600",
     outline: `bg-transparent border ${selectedColor.border} ${selectedColor.text} ${selectedColor.lightBg}`,
     tealOutline:
