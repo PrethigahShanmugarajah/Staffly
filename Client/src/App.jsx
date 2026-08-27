@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Attendance from "./pages/Attendance";
 import Leave from "./pages/Leave";
+import Payslips from "./pages/Payslips";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/employees" element={<Employees />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/leave" element={<Leave />} />
+          <Route path="/payslips" element={<Payslips />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
