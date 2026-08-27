@@ -273,7 +273,7 @@ export const SelectInput = ({
     <div className={`w-full ${className}`}>
       {label && (
         <label
-          className={`block text-sm font-medium mb-3 text-black ${labelClassName}`}
+          className={`flex items-center gap-2 text-sm font-medium mb-3 text-black ${labelClassName}`}
         >
           {label}{" "}
           {rest.required && <span className="text-red-500 ml-1">*</span>}
