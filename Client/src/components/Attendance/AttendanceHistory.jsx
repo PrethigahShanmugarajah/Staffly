@@ -14,8 +14,8 @@ const AttendanceHistory = ({ history }) => {
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead>
-            <tr>
+          <thead className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            <tr className="hover:bg-gray-50/50 transition-colors duration-150">
               <th className="px-6 py-4">Date</th>
               <th className="px-6 py-4">Check In</th>
               <th className="px-6 py-4">Check Out</th>
@@ -27,8 +27,8 @@ const AttendanceHistory = ({ history }) => {
 
           <tbody>
             {history.length === 0 ? (
-              <tr>
-                <td colSpan={6} className="text-center py-12 text-gray-400">
+              <tr className="hover:bg-gray-50/50 transition-colors duration-150">
+                <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
                   No records found
                 </td>
               </tr>
@@ -37,7 +37,7 @@ const AttendanceHistory = ({ history }) => {
                 const dayType = getDayTypeDisplay(record);
 
                 return (
-                  <tr key={record._id || record.id}>
+                  <tr key={record._id || record.id} className="hover:bg-gray-50/50 transition-colors duration-150">
                     <td className="px-6 py-4 font-medium text-gray-900">
                       {format(new Date(record.date), "MMM dd, yyyy")}
                     </td>
