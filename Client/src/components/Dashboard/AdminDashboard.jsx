@@ -6,7 +6,7 @@ import {
   UsersIcon,
 } from "lucide-react";
 import DashboardCard from "./DashboardCard";
-import DashboardHeader from "./DashboardHeader";
+import PageHeader from "../PageHeader";
 
 const AdminDashboard = ({ data }) => {
   const stats = [
@@ -45,7 +45,7 @@ const AdminDashboard = ({ data }) => {
         </p>
       </div> */}
 
-      <DashboardHeader
+      <PageHeader
         title="Dashboard"
         subtitle="Welcome back, Admin - here's your overview"
       />

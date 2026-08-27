@@ -5,6 +5,7 @@ import LoginLanding from "./pages/LoginLanding";
 import LoginForm from "./components/Login/LoginForm";
 import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
+import Employees from "./pages/Employees";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
 
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/employees" element={<Employees />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

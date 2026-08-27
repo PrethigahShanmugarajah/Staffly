@@ -1,6 +1,6 @@
-// Client / src / components / Dashboard / DashboardHeader.jsx
+// Client / src / components / PageHeader.jsx
 
-const DashboardHeader = ({ title, subtitle }) => {
+const PageHeader = ({ title, subtitle }) => {
   return (
     <div className="mb-8">
       <h1 className="text-2xl font-medium text-gray-900 tracking-tight">
@@ -12,4 +12,4 @@ const DashboardHeader = ({ title, subtitle }) => {
   );
 };
 
-export default DashboardHeader;
+export default PageHeader;
