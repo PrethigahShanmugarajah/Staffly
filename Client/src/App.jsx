@@ -7,6 +7,7 @@ import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Attendance from "./pages/Attendance";
+import Leave from "./pages/Leave";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees" element={<Employees />} />
           <Route path="/attendance" element={<Attendance />} />
+          <Route path="/leave" element={<Leave />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
