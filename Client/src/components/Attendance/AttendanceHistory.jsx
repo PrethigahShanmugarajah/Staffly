@@ -15,20 +15,23 @@ const AttendanceHistory = ({ history }) => {
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            <tr className="hover:bg-gray-50/50 transition-colors duration-150">
-              <th className="px-6 py-4">Date</th>
-              <th className="px-6 py-4">Check In</th>
-              <th className="px-6 py-4">Check Out</th>
-              <th className="px-6 py-4">Working Hours</th>
-              <th className="px-6 py-4">Day Type</th>
-              <th className="px-6 py-4">Status</th>
+            <tr>
+              <th className="px-6 py-4 bg-gray-50/80">Date</th>
+              <th className="px-6 py-4 bg-gray-50/80">Check In</th>
+              <th className="px-6 py-4 bg-gray-50/80">Check Out</th>
+              <th className="px-6 py-4 bg-gray-50/80">Working Hours</th>
+              <th className="px-6 py-4 bg-gray-50/80">Day Type</th>
+              <th className="px-6 py-4 bg-gray-50/80">Status</th>
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="divide-y divide-gray-100">
             {history.length === 0 ? (
-              <tr className="hover:bg-gray-50/50 transition-colors duration-150">
-                <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
+              <tr>
+                <td
+                  colSpan={6}
+                  className="px-6 py-12 text-center text-gray-400"
+                >
                   No records found
                 </td>
               </tr>
@@ -37,8 +40,11 @@ const AttendanceHistory = ({ history }) => {
                 const dayType = getDayTypeDisplay(record);
 
                 return (
-                  <tr key={record._id || record.id} className="hover:bg-gray-50/50 transition-colors duration-150">
-                    <td className="px-6 py-4 font-medium text-gray-900">
+                  <tr
+                    key={record._id || record.id}
+                    className="hover:bg-gray-50/50 transition-colors duration-150 cursor-pointer"
+                  >
+                    <td className="px-6 py-4 text-gray-600">
                       {format(new Date(record.date), "MMM dd, yyyy")}
                     </td>
 
