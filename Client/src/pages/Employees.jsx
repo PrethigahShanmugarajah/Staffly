@@ -72,7 +72,7 @@ const Employees = () => {
       {/* -------- Search Bar -------- */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <div className="relative flex-2">
-          {/* <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+          {/* <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
 
           <input
             type="text"
@@ -131,7 +131,7 @@ const Employees = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
           {filtered.length === 0 ? (
-            <p className="col-span-full text-center py-16 text-slate-400 bg-white rounded-2xl border border-dashed border-slate-200">
+            <p className="col-span-full text-center py-16 text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">
               No employees found
             </p>
           ) : (
@@ -161,18 +161,18 @@ const Employees = () => {
           >
             <div className="flex items-center justify-between p-6 pb-0">
               <div>
-                <h2 className="text-lg font-semibold text-slate-900">
+                <h2 className="text-lg font-semibold text-gray-900">
                   Add New Employee
                 </h2>
 
-                <p className="text-sm text-slate-500 mt-0.5">
+                <p className="text-sm text-gray-500 mt-0.5">
                   Create a user account and employee profile
                 </p>
               </div>
 
               {/* <button
                 onClick={() => setShowCreateModal(false)}
-                className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-600"
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
               </button> */}
@@ -181,7 +181,7 @@ const Employees = () => {
                 onClick={() => setShowCreateModal(false)}
                 variant="ghost"
                 iconLeft={<X className="w-5 h-5" />}
-                className="p-2! hover:bg-slate-100! text-slate-400! hover:text-slate-600!"
+                className="p-2! hover:bg-gray-100! text-gray-400! hover:text-gray-600!"
               />
             </div>
 
@@ -210,18 +210,18 @@ const Employees = () => {
           >
             <div className="flex items-center justify-between p-6 pb-0">
               <div>
-                <h2 className="text-lg font-semibold text-slate-900">
+                <h2 className="text-lg font-semibold text-gray-900">
                   Edit Employee
                 </h2>
 
-                <p className="text-sm text-slate-500 mt-0.5">
+                <p className="text-sm text-gray-500 mt-0.5">
                   Update employee details
                 </p>
               </div>
 
               {/* <button
                 onClick={() => setShowCreateModal(false)}
-                className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-600"
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
               </button> */}
@@ -230,7 +230,7 @@ const Employees = () => {
                 onClick={() => setEditEmployee(null)}
                 variant="ghost"
                 iconLeft={<X className="w-5 h-5" />}
-                className="p-2! hover:bg-slate-100! text-slate-400! hover:text-slate-600!"
+                className="p-2! hover:bg-gray-100! text-gray-400! hover:text-gray-600!"
               />
             </div>
 
