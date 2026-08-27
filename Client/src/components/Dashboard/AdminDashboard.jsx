@@ -5,8 +5,8 @@ import {
   FileTextIcon,
   UsersIcon,
 } from "lucide-react";
-import DashboardCard from "./DashboardCard";
 import PageHeader from "../PageHeader";
+import StatsCard from "../StatsCard";
 
 const AdminDashboard = ({ data }) => {
   const stats = [
@@ -69,11 +69,11 @@ const AdminDashboard = ({ data }) => {
         ))} */}
 
         {stats.map((s) => (
-          <DashboardCard
+          <StatsCard
             key={s.label}
-            icon={s.icon}
-            value={s.value}
             title={s.label}
+            value={s.value}
+            icon={s.icon}
           />
         ))}
       </div>

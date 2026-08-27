@@ -1,6 +1,9 @@
 // Client / src / pages / Dashboard.jsx
 import { useEffect, useState } from "react";
-import { dummyEmployeeDashboardData } from "../assets/assets";
+import {
+  dummyAdminDashboardData,
+  // dummyEmployeeDashboardData,
+} from "../assets/assets";
 import Loading from "../components/Loading";
 import AdminDashboard from "../components/Dashboard/AdminDashboard";
 import EmployeeDashboard from "../components/Dashboard/EmployeeDashboard";
@@ -11,7 +14,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setData(dummyEmployeeDashboardData);
+    setData(dummyAdminDashboardData);
     setTimeout(() => {
       setLoading(false);
     }, 1000);

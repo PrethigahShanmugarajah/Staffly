@@ -7,8 +7,8 @@ import {
 } from "lucide-react";
 import { useAppContext } from "../../context/appContext";
 import { Link } from "react-router-dom";
-import DashboardCard from "./DashboardCard";
 import PageHeader from "../PageHeader";
+import StatsCard from "../StatsCard";
 
 const EmployeeDashboard = ({ data }) => {
   const emp = data.employee;
@@ -73,11 +73,11 @@ const EmployeeDashboard = ({ data }) => {
         ))} */}
 
         {cards.map((card, index) => (
-          <DashboardCard
+          <StatsCard
             key={index}
-            icon={card.icon}
-            value={card.value}
             title={card.title}
+            value={card.value}
+            icon={card.icon}
           />
         ))}
       </div>
