@@ -4,6 +4,7 @@ import "dotenv/config";
 import cors from "cors";
 import multer from "multer";
 import connectDB from "./config/db.js";
+import authRouter from "./routes/authRoutes.js";
 
 /* -------- INITIALIZE EXPRESS -------- */
 const app = express();
@@ -18,6 +19,7 @@ app.use(multer().none());
 
 /* -------- ROUTES -------- */
 app.get("/", (req, res) => res.send("API is Working!"));
+app.use("/api/auth", authRouter);
 
 /* -------- PORT -------- */
 const port = process.env.PORT || 4000;
