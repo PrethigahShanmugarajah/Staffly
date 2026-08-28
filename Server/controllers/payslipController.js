@@ -87,3 +87,64 @@ export const createPayslip = async (req, res) => {
     });
   }
 };
+
+/* -------- Get Payslips -------- */
+export const getPayslips = async (req, res) => {
+  try {
+    const session = req.session;
+
+    const isAdmin = session.role === "ADMIN";
+
+    if (isAdmin) {
+      const payslips = await Payslip.find()
+        .populate("employeeId")
+        .sort({ createdAt: -1 });
+
+      const data = payslips.map((p) => {
+        const obj = p.toObject();
+        return {
+          ...obj,
+          id: obj._id.toString(),
+          employee: obj.employeeId,
+          employeeId: obj.employeeId?._id?.toString(),
+        };
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Payslips retrieved successfully.",
+        data,
+      });
+    } else {
+      const employee = await Employee.findOne({ userId: session.userId });
+
+      if (!employee) {
+        return res.status(404).json({
+          success: false,
+          message: "Employee not found.",
+        });
+      }
+
+      const payslips = await Payslip.find({ employeeId: employee._id }).sort({
+        createdAt: -1,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Payslips retrieved successfully.",
+        data: payslips,
+      });
+    }
+  } catch (error) {
+    console.error(
+      "Get Payslips Error:",
+      error?.stack || error?.message || error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "An unexpected error occurred while retrieving payslips.",
+      error: `Get Payslips Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
