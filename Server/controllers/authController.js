@@ -74,3 +74,24 @@ export const login = async (req, res) => {
     });
   }
 };
+
+/* -------- Get Session for Employee and Admin -------- */
+export const session = async (req, res) => {
+  try {
+    const session = req.session;
+
+    return res.status(200).json({
+      success: true,
+      message: "Session retrieved successfully.",
+      user: session,
+    });
+  } catch (error) {
+    console.error("Session Error:", error?.stack || error?.message || error);
+
+    return res.status(500).json({
+      success: false,
+      message: "An unexpected error occurred while retrieving the session.",
+      error: `Session Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
