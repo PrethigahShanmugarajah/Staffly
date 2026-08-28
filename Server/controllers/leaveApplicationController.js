@@ -169,3 +169,48 @@ export const getLeaves = async (req, res) => {
     });
   }
 };
+
+/* -------- Update Leave Status -------- */
+export const updateLeaveStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+
+    if (!["APPROVED", "REJECTED", "PENDING"].includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide a valid leave application status.",
+      });
+    }
+
+    const leave = await LeaveApplication.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { returnDocument: "after" },
+    );
+
+    if (!leave) {
+      return res.status(404).json({
+        success: false,
+        message: "Leave application not found.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Leave application status updated successfully.",
+      data: leave,
+    });
+  } catch (error) {
+    console.error(
+      "Update Leave Status Error:",
+      error?.stack || error?.message || error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "An unexpected error occurred while updating the leave application status.",
+      error: `Update Leave Status Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
