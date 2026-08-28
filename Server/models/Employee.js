@@ -1,6 +1,6 @@
 // Server / models / Employee.js
 import mongoose from "mongoose";
-import { DEPARTMENTS } from "../constants/department";
+import { DEPARTMENTS } from "../constants/department.js";
 
 const employeeSchema = new mongoose.Schema(
   {
@@ -43,9 +43,9 @@ const employeeSchema = new mongoose.Schema(
       default: 0,
     },
     employmentStatus: {
-      type: Number,
+      type: String,
       enum: ["ACTIVE", "INACTIVE"],
-      default: ["ACTIVE"],
+      default: "ACTIVE",
     },
     joinDate: {
       type: Date,
