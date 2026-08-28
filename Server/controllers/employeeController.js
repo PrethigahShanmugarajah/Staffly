@@ -265,3 +265,40 @@ export const updateEmployee = async (req, res) => {
     });
   }
 };
+
+/* -------- Delete Employee -------- */
+export const deleteEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // const employee = await Employee.findById(id);
+    const employee = await Employee.findOne({ _id: id, isDeleted: false });
+
+    if (!employee) {
+      return res.status(404).json({
+        success: false,
+        message: "Employee not found.",
+      });
+    }
+
+    employee.isDeleted = true;
+    employee.employmentStatus = "INACTIVE";
+    await employee.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Employee deleted successfully.",
+    });
+  } catch (error) {
+    console.error(
+      "Delete Employee Error:",
+      error?.stack || error?.message || error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "An unexpected error occurred while deleting the employee.",
+      error: `Delete Employee Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
