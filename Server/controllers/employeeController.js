@@ -2,6 +2,7 @@
 import Employee from "../models/Employee.js";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
+import mongoose from "mongoose";
 
 /* -------- Get Employees -------- */
 export const getEmployees = async (req, res) => {
@@ -180,6 +181,87 @@ export const createEmployee = async (req, res) => {
       success: false,
       message: "An unexpected error occurred while creating the employee.",
       error: `Create Employee Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
+
+/* -------- Update Employee -------- */
+export const updateEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid employee ID.",
+      });
+    }
+
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      position,
+      department,
+      basicSalary,
+      allowances,
+      deductions,
+      password,
+      role,
+      bio,
+      employmentStatus,
+    } = req.body;
+
+    const employee = await Employee.findById(id);
+
+    if (!employee) {
+      return res.status(404).json({
+        success: false,
+        message: "Employee not found.",
+      });
+    }
+
+    const updatedEmployee = await Employee.findByIdAndUpdate(
+      id,
+      {
+        firstName,
+        lastName,
+        email,
+        phone,
+        position,
+        // department: department || "Engineering",
+        department,
+        basicSalary: Number(basicSalary) || 0,
+        allowances: Number(allowances) || 0,
+        deductions: Number(deductions) || 0,
+        // employmentStatus: employmentStatus || "ACTIVE",
+        employmentStatus,
+        bio: bio || "",
+      },
+      { new: true },
+    );
+
+    const userUpdate = { email };
+    if (role) userUpdate.role = role;
+    if (password) userUpdate.password = await bcrypt.hash(password, 10);
+    await User.findByIdAndUpdate(employee.userId, userUpdate);
+
+    return res.status(200).json({
+      success: true,
+      message: "Employee updated successfully.",
+      employee: updatedEmployee,
+    });
+  } catch (error) {
+    console.error(
+      "Update Employee Error:",
+      error?.stack || error?.message || error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "An unexpected error occurred while updating the employee.",
+      error: `Update Employee Error: ${error?.stack || error?.message || error}`,
     });
   }
 };
