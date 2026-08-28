@@ -50,3 +50,15 @@ export const protect = (req, res, next) => {
       });
   }
 };
+
+/* -------- Protect Admin-Only Routes -------- */
+export const protectAdmin = (req, res, next) => {
+  if (req?.session?.role !== "ADMIN") {
+    return res.status(403).json({
+      success: false,
+      message: "Admin access required.",
+    });
+  }
+
+  next();
+};
