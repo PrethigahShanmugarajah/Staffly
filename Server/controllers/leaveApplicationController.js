@@ -106,3 +106,66 @@ export const createLeave = async (req, res) => {
     });
   }
 };
+
+/* -------- Get Leaves -------- */
+export const getLeaves = async (req, res) => {
+  try {
+    const session = req.session;
+    const isAdmin = session.role === "ADMIN";
+
+    if (isAdmin) {
+      const status = req.query.status;
+      const where = status ? { status } : {};
+      const leaves = await LeaveApplication.find(where)
+        .populate("employeeId")
+        .sort({ createdAt: -1 });
+
+      const data = leaves.map((l) => {
+        const obj = l.toObject();
+        return {
+          ...obj,
+          id: obj._id.toString(),
+          employee: obj.employeeId,
+          employeeId: obj.employeeId?._id?.toString(),
+        };
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Leave applications retrieved successfully.",
+        data,
+      });
+    } else {
+      const employee = await Employee.findOne({
+        userId: session.userId,
+      }).lean();
+
+      if (!employee) {
+        return res.status(404).json({
+          success: false,
+          message: "Employee not found.",
+        });
+      }
+
+      const leaves = await LeaveApplication.find({
+        employeeId: employee._id,
+      }).sort({ createdAt: -1 });
+
+      return res.status(200).json({
+        success: true,
+        message: "Leave applications retrieved successfully.",
+        data: leaves,
+        employee: { ...employee, id: employee._id.toString() },
+      });
+    }
+  } catch (error) {
+    console.error("Get Leaves Error:", error?.stack || error?.message || error);
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "An unexpected error occurred while retrieving leave applications.",
+      error: `Get Leaves Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
