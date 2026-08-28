@@ -148,3 +148,42 @@ export const getPayslips = async (req, res) => {
     });
   }
 };
+
+/* -------- Get PayslipBy ID -------- */
+export const getPayslipByID = async (req, res) => {
+  try {
+    const payslip = await Payslip.findById(req.params.id)
+      .populate("employeeId")
+      .lean();
+
+    if (!payslip) {
+      return res.status(404).json({
+        success: false,
+        message: "Payslip not found.",
+      });
+    }
+
+    const result = {
+      ...payslip,
+      id: payslip._id.toString(),
+      employee: payslip.employeeId,
+    };
+
+    return res.status(200).json({
+      success: true,
+      message: "Payslip retrieved successfully.",
+      result,
+    });
+  } catch (error) {
+    console.error(
+      "Get PayslipBy ID Error:",
+      error?.stack || error?.message || error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "An unexpected error occurred while retrieving the payslip.",
+      error: `Get PayslipBy ID Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
