@@ -9,6 +9,7 @@ import employeesRouter from "./routes/employeeRoutes.js";
 import profileRouter from "./routes/profileRoutes.js";
 import attendanceRouter from "./routes/attendanceRoutes.js";
 import leaveApplicationRouter from "./routes/leaveApplicationRoutes.js";
+import payslipRouter from "./routes/payslipRoutes.js";
 
 /* -------- INITIALIZE EXPRESS -------- */
 const app = express();
@@ -28,6 +29,7 @@ app.use("/api/employees", employeesRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/attendance", attendanceRouter);
 app.use("/api/leaveApplication", leaveApplicationRouter);
+app.use("/api/payslips", payslipRouter);
 
 /* -------- PORT -------- */
 const port = process.env.PORT || 4000;
