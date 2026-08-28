@@ -95,3 +95,71 @@ export const session = async (req, res) => {
     });
   }
 };
+
+/* -------- Change Password for Employee and Admin -------- */
+export const changePassword = async (req, res) => {
+  try {
+    const session = req.session;
+
+    const { currentPassword, newPassword } = req.body;
+
+    // if (!currentPassword || !newPassword) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Both current and new passwords are required.",
+    //   });
+    // }
+
+    if (!currentPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Current password is required.",
+      });
+    }
+
+    if (!newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "New password is required.",
+      });
+    }
+
+    const user = await User.findById(session.userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User account not found.",
+      });
+    }
+
+    const isValid = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isValid) {
+      return res.status(401).json({
+        success: false,
+        message: "The current password is incorrect.",
+      });
+    }
+
+    const hashed = await bcrypt.hash(newPassword, 10);
+
+    await User.findByIdAndUpdate(session.userId, { password: hashed });
+
+    return res.status(200).json({
+      success: true,
+      message: "Password changed successfully.",
+    });
+  } catch (error) {
+    console.error(
+      "Change Password Error:",
+      error?.stack || error?.message || error,
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "An unexpected error occurred while changing the password.",
+      error: `Change Password Error: ${error?.stack || error?.message || error}`,
+    });
+  }
+};
