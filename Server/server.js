@@ -8,6 +8,7 @@ import authRouter from "./routes/authRoutes.js";
 import employeesRouter from "./routes/employeeRoutes.js";
 import profileRouter from "./routes/profileRoutes.js";
 import attendanceRouter from "./routes/attendanceRoutes.js";
+import leaveApplicationRouter from "./routes/leaveApplicationRoutes.js";
 
 /* -------- INITIALIZE EXPRESS -------- */
 const app = express();
@@ -26,6 +27,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/employees", employeesRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/attendance", attendanceRouter);
+app.use("/api/leaveApplication", leaveApplicationRouter);
 
 /* -------- PORT -------- */
 const port = process.env.PORT || 4000;
