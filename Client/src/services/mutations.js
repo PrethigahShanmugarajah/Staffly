@@ -86,3 +86,30 @@ export const updateEmployeeService = async (id, payload) => {
     throw error;
   }
 };
+
+/* -------- Delete Employee -------- */
+export const deleteEmployeeService = async (id) => {
+  try {
+    const { data } = await api.delete(`${API_ROUTES.EMPLOYEES.BASE}/${id}`);
+
+    console.log("Delete Employee API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Delete Employee Success:", data?.message);
+    } else {
+      toast(data?.message || "Delete employee with warning");
+      console.warn(
+        "Delete Employee Warning:",
+        data?.message || "Delete Employee Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Delete Employee Error:", error);
+
+    throw error;
+  }
+};
