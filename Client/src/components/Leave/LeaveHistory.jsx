@@ -4,31 +4,36 @@ import { Check, X } from "lucide-react";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Button from "../Button";
+import { updateLeaveApplicationStatusService } from "../../services/mutations";
+import ConfirmPopup from "../ConfirmPopup";
 
-// eslint-disable-next-line no-unused-vars
 const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
   // const [processing, setProcessing] = useState(null);
   const [processingApprove, setProcessingApprove] = useState(false);
   const [processingReject, setProcessingReject] = useState(false);
+  const [confirmAction, setConfirmAction] = useState(null);
 
   // const handleStatusUpdate = async (id, status) => {
   //   setProcessing(id);
   // };
 
-  const handleStatusUpdate = async (status) => {
+  const handleStatusUpdate = async (id, status) => {
     if (status === "APPROVED") {
       setProcessingApprove(true);
     } else {
       setProcessingReject(true);
     }
 
-    setTimeout(() => {
-      if (status === "APPROVED") {
-        setProcessingApprove(false);
-      } else {
-        setProcessingReject(false);
-      }
-    }, 1000);
+    try {
+      // await api.patch(`/api/leaveApplication/${id}`, { status });
+      await updateLeaveApplicationStatusService(id, { status });
+      onUpdate();
+    } finally {
+      // setProcessingApprove(null);
+      // setProcessingReject(null);
+      setProcessingApprove(false);
+      setProcessingReject(false);
+    }
   };
 
   return (
@@ -67,8 +72,7 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                   >
                     {isAdmin && (
                       <td className="px-6 py-4 text-gray-900">
-                        {leave.employee?.firstName}
-                        {leave.employee?.lastName}
+                        {leave.employee?.firstName} {leave.employee?.lastName}
                       </td>
                     )}
 
@@ -127,7 +131,16 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
 
                             <Button
                               disabled={processingApprove || processingReject}
-                              onClick={() => handleStatusUpdate("APPROVED")}
+                              onClick={() =>
+                                setConfirmAction({
+                                  id: leave._id || leave.id,
+                                  status: "APPROVED",
+                                  employeeName: `${leave.employee?.firstName} ${leave.employee?.lastName}`,
+                                  startDate: leave.startDate,
+                                  endDate: leave.endDate,
+                                  reason: leave.reason,
+                                })
+                              }
                               color="teal"
                               variant="ghost"
                               hoverRounded={false}
@@ -159,7 +172,16 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                             </button> */}
 
                             <Button
-                              onClick={() => handleStatusUpdate("REJECTED")}
+                              onClick={() =>
+                                setConfirmAction({
+                                  id: leave._id || leave.id,
+                                  status: "REJECTED",
+                                  employeeName: `${leave.employee?.firstName} ${leave.employee?.lastName}`,
+                                  startDate: leave.startDate,
+                                  endDate: leave.endDate,
+                                  reason: leave.reason,
+                                })
+                              }
                               disabled={processingApprove || processingReject}
                               color="gray"
                               variant="ghost"
@@ -184,6 +206,56 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
           </tbody>
         </table>
       </div>
+
+      {confirmAction && (
+        <ConfirmPopup
+          onClose={() => setConfirmAction(null)}
+          onConfirm={async () => {
+            await handleStatusUpdate(confirmAction.id, confirmAction.status);
+            setConfirmAction(null);
+          }}
+          loading={
+            confirmAction.status === "APPROVED"
+              ? processingApprove
+              : processingReject
+          }
+          title={
+            confirmAction.status === "APPROVED"
+              ? "Approve Leave?"
+              : "Reject Leave?"
+          }
+          description={
+            <>
+              <p>
+                Are you sure you want to{" "}
+                {confirmAction.status === "APPROVED" ? "approve" : "reject"}{" "}
+                this leave application?
+              </p>
+
+              <div className="mt-4 text-center space-y-2">
+                <p>
+                  <strong>Employee:</strong> {confirmAction.employeeName}
+                </p>
+
+                <p>
+                  <strong>Dates:</strong>{" "}
+                  {format(new Date(confirmAction.startDate), "MMM dd")} -{" "}
+                  {format(new Date(confirmAction.endDate), "MMM dd, yyyy")}
+                </p>
+
+                <p>
+                  <strong>Reason:</strong> {confirmAction.reason}
+                </p>
+              </div>
+            </>
+          }
+          confirmText={
+            confirmAction.status === "APPROVED" ? "Approve" : "Reject"
+          }
+          closeText="Cancel"
+          confirmColor={confirmAction.status === "APPROVED" ? "green" : "red"}
+        />
+      )}
     </div>
   );
 };
