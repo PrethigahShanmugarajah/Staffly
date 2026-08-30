@@ -16,7 +16,7 @@ import {
 import Button from "./Button";
 import { useAppContext } from "../context/appContext";
 import { BeatLoader } from "react-spinners";
-import { fetchProfile } from "../services/fetch";
+import { fetchProfileService } from "../services/fetch";
 
 const Sidebar = () => {
   const { pathname } = useLocation();
@@ -37,7 +37,7 @@ const Sidebar = () => {
   // }, [token]);
 
   useEffect(() => {
-    fetchProfile().then((data) => {
+    fetchProfileService().then((data) => {
       const firstName = data?.employee?.firstName || data?.firstName;
       const lastName = data?.employee?.lastName || data?.lastName;
 

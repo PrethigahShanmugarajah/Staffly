@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import AdminDashboard from "../components/Dashboard/AdminDashboard";
 import EmployeeDashboard from "../components/Dashboard/EmployeeDashboard";
-import { fetchDashboard } from "../services/fetch";
+import { fetchDashboardService } from "../services/fetch";
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
@@ -18,7 +18,7 @@ const Dashboard = () => {
   // }, []);
 
   useEffect(() => {
-    fetchDashboard()
+    fetchDashboardService()
       .then((data) => setData(data))
       .finally(() => setLoading(false));
   }, []);

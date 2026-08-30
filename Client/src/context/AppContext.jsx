@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "./appContext";
 import { useEffect, useState } from "react";
-import { fetchSession } from "../services/fetch";
+import { fetchSessionService } from "../services/fetch";
 import { loginUser } from "../services/mutations";
 
 export const AppProvider = ({ children }) => {
@@ -23,7 +23,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const data = await fetchSession(storedToken);
+      const data = await fetchSessionService(storedToken);
       setUser(data.user);
     } catch {
       /* -------- Token is invalid, clear it -------- */
