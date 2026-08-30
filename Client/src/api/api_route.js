@@ -14,6 +14,9 @@ const API_ROUTES = {
   EMPLOYEES: {
     BASE: "/api/employees",
   },
+  LEAVE_APPLICATION: {
+    BASE: "/api/leaveApplication",
+  },
 };
 
 export default API_ROUTES;
