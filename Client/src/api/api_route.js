@@ -6,7 +6,10 @@ const API_ROUTES = {
     LOGIN: "/api/auth/login",
   },
   PROFILE: {
-    SESSION: "/api/profile",
+    GET: "/api/profile",
+  },
+  DASHBOARD: {
+    GET: "/api/dashboard",
   },
 };
 
