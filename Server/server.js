@@ -11,6 +11,8 @@ import attendanceRouter from "./routes/attendanceRoutes.js";
 import leaveApplicationRouter from "./routes/leaveApplicationRoutes.js";
 import payslipRouter from "./routes/payslipRoutes.js";
 import dashboardRouter from "./routes/dashboardRoutes.js";
+import { serve } from "inngest/express";
+import { inngest, functions } from "./inngest/index.js";
 
 /* -------- INITIALIZE EXPRESS -------- */
 const app = express();
@@ -33,6 +35,7 @@ app.use("/api/leaveApplication", leaveApplicationRouter);
 app.use("/api/payslips", payslipRouter);
 app.use("/api/dashboard", dashboardRouter);
 
+app.use("/api/inngest", serve({ client: inngest, functions }));
 
 /* -------- PORT -------- */
 const port = process.env.PORT || 4000;
