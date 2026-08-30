@@ -1,7 +1,6 @@
 // Client / src / components / Sidebar.jsx
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { dummyProfileData } from "../assets/assets";
 import {
   CalendarIcon,
   ChevronRightIcon,
@@ -15,15 +14,38 @@ import {
   XIcon,
 } from "lucide-react";
 import Button from "./Button";
+import { useAppContext } from "../context/appContext";
+import { BeatLoader } from "react-spinners";
+import { fetchProfile } from "../services/fetch";
 
 const Sidebar = () => {
   const { pathname } = useLocation();
   const [userName, setUserName] = useState();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const { user, loading, logout } = useAppContext();
+
+  // useEffect(() => {
+  //   api
+  //     .get("/api/profile", {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then(({ data }) => {
+  //       if (data.firstName)
+  //         setUserName(`${data?.firstName} ${data?.lastName || ""}`.trim());
+  //     });
+  // }, [token]);
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setUserName(dummyProfileData.firstName + "" + dummyProfileData.lastName);
+    fetchProfile().then((data) => {
+      const firstName = data?.employee?.firstName || data?.firstName;
+      const lastName = data?.employee?.lastName || data?.lastName;
+
+      if (firstName) {
+        const fullName = `${firstName} ${lastName || ""}`.trim();
+        setUserName(fullName);
+      }
+    });
   }, []);
 
   /* -------- Close Mobile Sidebar on route Change -------- */
@@ -32,8 +54,7 @@ const Sidebar = () => {
     setMobileOpen(false);
   }, [pathname]);
 
-  // eslint-disable-next-line no-constant-binary-expression
-  const role = "" || "EMPLOYEE";
+  const role = user?.role;
 
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutGridIcon },
@@ -46,6 +67,7 @@ const Sidebar = () => {
   ];
 
   const handleLogout = () => {
+    logout();
     window.location.href = "/login";
   };
 
@@ -118,39 +140,46 @@ const Sidebar = () => {
 
       {/* -------- Navigation List -------- */}
       <div className="flex-1 px-3 space-y-0.5 overflow-y-auto">
-        {navItems.map((item) => {
-          const isActive = pathname.startsWith(item.href);
+        {loading ? (
+          <div className="px-3 py-3 flex items-center gap-2">
+            <BeatLoader size={8} color="#FFFFFF" />
+            <span className="text-sm">Loading...</span>
+          </div>
+        ) : (
+          navItems.map((item) => {
+            const isActive = pathname.startsWith(item.href);
 
-          return (
-            <Link
-              key={item.name}
-              to={item.href}
-              className={`group flex items-center gap-3 px-3 py-2.5 rounded-md text-[13px] font-medium transition-all duration-150 relative ${
-                isActive
-                  ? "bg-teal-500/12 text-teal-300"
-                  : "text-gray-300 hover:text-white hover:bg-white/4"
-              }`}
-            >
-              {isActive && (
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.75 h-5 rounded-r-full bg-teal-500" />
-              )}
-
-              <item.icon
-                className={`w-4.25 h-4.25 shrink-0 ${
+            return (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`group flex items-center gap-3 px-3 py-2.5 rounded-md text-[13px] font-medium transition-all duration-150 relative ${
                   isActive
-                    ? "text-teal-300"
-                    : "text-gray-400 group-hover:text-gray-300"
+                    ? "bg-teal-500/12 text-teal-300"
+                    : "text-gray-300 hover:text-white hover:bg-white/4"
                 }`}
-              />
+              >
+                {isActive && (
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.75 h-5 rounded-r-full bg-teal-500" />
+                )}
 
-              <span className="flex-1">{item.name}</span>
+                <item.icon
+                  className={`w-4.25 h-4.25 shrink-0 ${
+                    isActive
+                      ? "text-teal-300"
+                      : "text-gray-400 group-hover:text-gray-300"
+                  }`}
+                />
 
-              {isActive && (
-                <ChevronRightIcon className="w-3.5 h-3.5 text-teal-500/50" />
-              )}
-            </Link>
-          );
-        })}
+                <span className="flex-1">{item.name}</span>
+
+                {isActive && (
+                  <ChevronRightIcon className="w-3.5 h-3.5 text-teal-500/50" />
+                )}
+              </Link>
+            );
+          })
+        )}
       </div>
 
       {/* -------- Logout -------- */}
