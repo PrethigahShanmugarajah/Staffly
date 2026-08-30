@@ -33,7 +33,7 @@ export const fetchSession = async () => {
 /* -------- Fetch Profile  -------- */
 export const fetchProfile = async () => {
   try {
-    const { data } = await api.get(API_ROUTES.PROFILE.SESSION);
+    const { data } = await api.get(API_ROUTES.PROFILE.GET);
 
     console.log("Fetch Profile API Response:", data);
 
@@ -52,6 +52,33 @@ export const fetchProfile = async () => {
   } catch (error) {
     toast.error(error?.response?.data?.message || error?.message);
     console.error("Fetch Profile Error:", error);
+
+    throw error;
+  }
+};
+
+/* -------- Fetch Dashboard -------- */
+export const fetchDashboard = async () => {
+  try {
+    const { data } = await api.get(API_ROUTES.DASHBOARD.GET);
+
+    console.log("Fetch Dashboard API Response:", data);
+
+    if (data?.success) {
+      // toast.success(data?.message);
+      console.log("Fetch Dashboard Success:", data?.message);
+    } else {
+      toast(data?.message || "Fetch dashboard with warning");
+      console.warn(
+        "Fetch Dashboard Warning:",
+        data?.message || "Fetch Dashboard Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Fetch Dashboard Error:", error);
 
     throw error;
   }
