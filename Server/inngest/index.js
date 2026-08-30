@@ -40,7 +40,7 @@ const autoCheckOut = inngest.createFunction(
           
           <p style='font-size: 16px;'>You have a check-in in ${employee.department} today.</p>
           
-          <p style='font-size: 18px; font-weight: bold; color: #007BFF; margin: 8px 0;'>${attendance?.checkIn?.toLocaleTimeString()}</p>
+          <p style='font-size: 18px; font-weight: bold; color: #0EA5E9; margin: 8px 0;'>${attendance?.checkIn?.toLocaleTimeString()}</p>
 
           <p style='font-size: 16px;'>Please make sure to check-out in one hour.</p>
 
@@ -105,7 +105,7 @@ const leaveApplicationReminder = inngest.createFunction(
           
           <p style='font-size: 16px;'>You have a leave application in ${employee.department} today.</p>
           
-          <p style='font-size: 18px; font-weight: bold; color: #007BFF; margin: 8px 0;'>${leaveApplication?.startDate?.toLocaleDateString()}</p>
+          <p style='font-size: 18px; font-weight: bold; color: #0EA5E9; margin: 8px 0;'>${leaveApplication?.startDate?.toLocaleDateString()}</p>
 
           <p style='font-size: 16px;'>Please make sure to take action on this leave application.</p>
 
