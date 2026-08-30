@@ -5,6 +5,9 @@ const API_ROUTES = {
     SESSION: "/api/auth/session",
     LOGIN: "/api/auth/login",
   },
+  PROFILE: {
+    SESSION: "/api/profile",
+  },
 };
 
 export default API_ROUTES;
