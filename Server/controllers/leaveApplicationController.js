@@ -1,4 +1,5 @@
 // Server / controllers / leaveApplicationController.js
+import { inngest } from "../inngest/index.js";
 import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/LeaveApplication.js";
 
