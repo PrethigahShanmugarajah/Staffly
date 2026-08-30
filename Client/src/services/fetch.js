@@ -4,7 +4,7 @@ import API_ROUTES from "../api/api_route";
 import api from "../api/axios";
 
 /* -------- Fetch Session  -------- */
-export const fetchSession = async () => {
+export const fetchSessionService = async () => {
   try {
     const { data } = await api.get(API_ROUTES.AUTH.SESSION);
 
@@ -31,9 +31,9 @@ export const fetchSession = async () => {
 };
 
 /* -------- Fetch Profile  -------- */
-export const fetchProfile = async () => {
+export const fetchProfileService = async () => {
   try {
-    const { data } = await api.get(API_ROUTES.PROFILE.GET);
+    const { data } = await api.get(API_ROUTES.PROFILE.BASE);
 
     console.log("Fetch Profile API Response:", data);
 
@@ -58,9 +58,9 @@ export const fetchProfile = async () => {
 };
 
 /* -------- Fetch Dashboard -------- */
-export const fetchDashboard = async () => {
+export const fetchDashboardService = async () => {
   try {
-    const { data } = await api.get(API_ROUTES.DASHBOARD.GET);
+    const { data } = await api.get(API_ROUTES.DASHBOARD.BASE);
 
     console.log("Fetch Dashboard API Response:", data);
 
@@ -79,6 +79,37 @@ export const fetchDashboard = async () => {
   } catch (error) {
     toast.error(error?.response?.data?.message || error?.message);
     console.error("Fetch Dashboard Error:", error);
+
+    throw error;
+  }
+};
+
+/* -------- Fetch Employees -------- */
+export const fetchEmployeesService = async (selectedDept = "") => {
+  try {
+    const url = selectedDept
+      ? `${API_ROUTES.EMPLOYEES.BASE}?department=${selectedDept}`
+      : API_ROUTES.EMPLOYEES.BASE;
+
+    const { data } = await api.get(url);
+
+    console.log("Fetch Employees API Response:", data);
+
+    if (data?.success) {
+      // toast.success(data?.message);
+      console.log("Fetch Employees Success:", data?.message);
+    } else {
+      toast(data?.message || "Fetch employees with warning");
+      console.warn(
+        "Fetch Employees Warning:",
+        data?.message || "Fetch Employees Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Fetch Employees Error:", error);
 
     throw error;
   }
