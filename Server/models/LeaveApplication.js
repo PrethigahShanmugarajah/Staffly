@@ -34,8 +34,6 @@ const leaveApplicationSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-leaveApplicationSchema.index({ employeeId: 1, date: 1 }, { unique: true });
-
 const LeaveApplication =
   mongoose.models.LeaveApplication ||
   mongoose.model("LeaveApplication", leaveApplicationSchema);
