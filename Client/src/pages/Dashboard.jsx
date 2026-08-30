@@ -1,23 +1,26 @@
 // Client / src / pages / Dashboard.jsx
 import { useEffect, useState } from "react";
-import {
-  dummyAdminDashboardData,
-  // dummyEmployeeDashboardData,
-} from "../assets/assets";
 import Loading from "../components/Loading";
 import AdminDashboard from "../components/Dashboard/AdminDashboard";
 import EmployeeDashboard from "../components/Dashboard/EmployeeDashboard";
+import { fetchDashboard } from "../services/fetch";
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   api
+  //     .get("/api/dashboard")
+  //     .then((res) => setData(res.data))
+  //     .catch((err) => toast.error(err.response?.data?.error || err?.message))
+  //     .finally(() => setLoading(false));
+  // }, []);
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setData(dummyAdminDashboardData);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    fetchDashboard()
+      .then((data) => setData(data))
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) return <Loading size="xl" />;
