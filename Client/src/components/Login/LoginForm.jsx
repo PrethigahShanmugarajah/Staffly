@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Button from "../Button";
 import { InputField } from "../FormField/InputField";
+import { useAppContext } from "../../context/appContext";
 
 const LoginForm = ({ role, title, subtitle }) => {
   const [email, setEmail] = useState("");
@@ -14,8 +15,20 @@ const LoginForm = ({ role, title, subtitle }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
 
+  const { navigate, login } = useAppContext();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      await login(email, password, role);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Login Error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
