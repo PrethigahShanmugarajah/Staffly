@@ -113,3 +113,60 @@ export const deleteEmployeeService = async (id) => {
     throw error;
   }
 };
+
+/* -------- Create Leave Application -------- */
+export const createLeaveApplicationService = async (payload) => {
+  try {
+    const { data } = await api.post(API_ROUTES.LEAVE_APPLICATION.BASE, payload);
+
+    console.log("Create Leave Application API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Create Leave Application Success:", data?.message);
+    } else {
+      toast(data?.message || "Create leave application with warning");
+      console.warn(
+        "Create Leave Application Warning:",
+        data?.message || "Create Leave Application Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Create Leave Application Error:", error);
+
+    throw error;
+  }
+};
+
+/* -------- Update Leave Application Status -------- */
+export const updateLeaveApplicationStatusService = async (id, payload) => {
+  try {
+    const { data } = await api.patch(
+      `${API_ROUTES.LEAVE_APPLICATION.BASE}/${id}`,
+      payload,
+    );
+
+    console.log("Update Leave Application Status API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Update Leave Application Status Success:", data?.message);
+    } else {
+      toast(data?.message || "Update leave application status with warning");
+      console.warn(
+        "Update Leave Application Status Warning:",
+        data?.message || "Update Leave Application Status Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Update Leave Application Status Error:", error);
+
+    throw error;
+  }
+};
