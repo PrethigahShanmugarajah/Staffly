@@ -8,19 +8,46 @@ import { Eye, EyeOff } from "lucide-react";
 import { TextAreaField } from "../FormField/TextAreaField";
 import { SelectInput } from "../FormField/SelectInput";
 import Button from "../Button";
+import {
+  createEmployeeService,
+  updateEmployeeService,
+} from "../../services/mutations";
 
-// eslint-disable-next-line no-unused-vars
 const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
   const { navigate } = useAppContext();
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [showTemporaryPassword, setShowTemporaryPassword] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [department, setDepartment] = useState(initialData?.department || "");
 
   const isEditMode = !!initialData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    if (isEditMode) {
+      const pwd = formData.get("password");
+      if (!pwd) formData.delete("password");
+    }
+
+    try {
+      // const url = isEditMode
+      //   ? `/api/employees/${initialData.id}`
+      //   : "/api/employees";
+      // const method = isEditMode ? "put" : "post";
+      // await api[method](url, formData);
+      // onSuccess ? onSuccess() : navigate("/employees");
+      if (isEditMode) {
+        await updateEmployeeService(initialData.id, formData);
+      } else {
+        await createEmployeeService(formData);
+      }
+
+      onSuccess ? onSuccess() : navigate("/employees");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -185,7 +212,8 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
                 value: deptName,
                 label: deptName,
               }))}
-              value={initialData?.department || ""}
+              value={department}
+              onChange={(value) => setDepartment(value)}
             />
           </div>
 
