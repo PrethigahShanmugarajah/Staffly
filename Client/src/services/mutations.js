@@ -4,7 +4,7 @@ import API_ROUTES from "../api/api_route";
 import api from "../api/axios";
 
 /* -------- Login User -------- */
-export const loginUser = async (payload) => {
+export const loginUserService = async (payload) => {
   try {
     const { data } = await api.post(API_ROUTES.AUTH.LOGIN, payload);
 
@@ -25,6 +25,63 @@ export const loginUser = async (payload) => {
   } catch (error) {
     toast.error(error?.response?.data?.message || error?.message);
     console.error("Login Error:", error);
+
+    throw error;
+  }
+};
+
+/* -------- Create Employee -------- */
+export const createEmployeeService = async (payload) => {
+  try {
+    const { data } = await api.post(API_ROUTES.EMPLOYEES.BASE, payload);
+
+    console.log("Create Employee API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Create Employee Success:", data?.message);
+    } else {
+      toast(data?.message || "Create employee with warning");
+      console.warn(
+        "Create Employee Warning:",
+        data?.message || "Create Employee Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Create Employee Error:", error);
+
+    throw error;
+  }
+};
+
+/* -------- Update Employee -------- */
+export const updateEmployeeService = async (id, payload) => {
+  try {
+    const { data } = await api.put(
+      `${API_ROUTES.EMPLOYEES.BASE}/${id}`,
+      payload,
+    );
+
+    console.log("Update Employee API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Update Employee Success:", data?.message);
+    } else {
+      toast(data?.message || "Update employee with warning");
+      console.warn(
+        "Update Employee Warning:",
+        data?.message || "Update Employee Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Update Employee Error:", error);
 
     throw error;
   }
