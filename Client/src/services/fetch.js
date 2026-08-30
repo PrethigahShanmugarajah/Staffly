@@ -114,3 +114,30 @@ export const fetchEmployeesService = async (selectedDept = "") => {
     throw error;
   }
 };
+
+/* -------- Fetch Leave Applications -------- */
+export const fetchLeaveApplicationsService = async () => {
+  try {
+    const { data } = await api.get(API_ROUTES.LEAVE_APPLICATION.BASE);
+
+    console.log("Fetch Leave Applications API Response:", data);
+
+    if (data?.success) {
+      // toast.success(data?.message);
+      console.log("Fetch Leave Applications Success:", data?.message);
+    } else {
+      toast(data?.message || "Fetch leave applications with warning");
+      console.warn(
+        "Fetch Leave Applications Warning:",
+        data?.message || "Fetch Leave Applications Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Fetch Leave Applications Error:", error);
+
+    throw error;
+  }
+};
