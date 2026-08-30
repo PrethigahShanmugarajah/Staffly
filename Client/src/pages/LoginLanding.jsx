@@ -10,7 +10,7 @@ const LoginLanding = () => {
 
   if (loading) return <Loading size="xl" />;
 
-  if (!user) return <Navigate to="/login" />;
+  if (user) return <Navigate to="/" />;
 
   const portalOptions = [
     {
