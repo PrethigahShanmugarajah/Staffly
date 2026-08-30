@@ -28,10 +28,22 @@ const ConfirmPopup = ({
       border: "border-teal-300",
     },
     gray: {
-      button: "bg-gray-600 hover:bg-gray-700 text-white",
+      button: "!bg-gray-600 !hover:bg-gray-700 text-white!",
       title: "text-gray-600",
       loader: "#1F2937",
       border: "border-gray-300",
+    },
+    green: {
+      button: "!bg-green-600 hover:!bg-green-700 text-white!",
+      title: "text-green-600",
+      loader: "#15803D",
+      border: "border-green-300",
+    },
+    red: {
+      button: "!bg-red-600 hover:!bg-red-700 text-white!",
+      title: "text-red-600",
+      loader: "#B91C1C",
+      border: "border-red-300",
     },
   };
 
@@ -95,7 +107,7 @@ const ConfirmPopup = ({
               variant={loading ? "outline" : "primary"}
               color={confirmColor}
               hoverRounded={false}
-              className="min-w-22.5! rounded-lg px-4! py-2!"
+              className={`min-w-22.5! rounded-lg px-4! py-2! ${colors.button}`}
             >
               {loading ? (
                 <ClipLoader size={20} color={colors.loader} />
