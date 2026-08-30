@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "./appContext";
 import { useEffect, useState } from "react";
 import { fetchSessionService } from "../services/fetch";
-import { loginUser } from "../services/mutations";
+import { loginUserService } from "../services/mutations";
 
 export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password, role_type) => {
-    const data = await loginUser({
+    const data = await loginUserService({
       email,
       password,
       role_type,
