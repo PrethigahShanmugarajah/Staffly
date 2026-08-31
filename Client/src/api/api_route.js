@@ -20,6 +20,9 @@ const API_ROUTES = {
   ATTENDANCE: {
     BASE: "/api/attendance",
   },
+  PAYSLIPS: {
+    BASE: "/api/payslips",
+  },
 };
 
 export default API_ROUTES;
