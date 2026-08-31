@@ -39,15 +39,33 @@ const Payslips = () => {
     fetchPayslips();
   }, [fetchPayslips]);
 
+  // useEffect(() => {
+  //   if (isAdmin)
+  //     // api
+  //     //   .get("/api/employees")
+  //     fetchEmployeesService()
+  //       .then((res) => {
+  //         setEmployees((res.data.result || []).filter((e) => !e.isDeleted));
+  //       })
+  //       .catch(() => {});
+  // }, [isAdmin]);
+
   useEffect(() => {
-    if (isAdmin)
-      // api
-      //   .get("/api/employees")
-      fetchEmployeesService()
-        .then((res) => {
-          setEmployees((res.data.result || []).filter((e) => !e.isDeleted));
-        })
-        .catch(() => {});
+    if (!isAdmin) return;
+
+    const loadEmployees = async () => {
+      try {
+        const res = await fetchEmployeesService();
+
+        const employeeList = (res?.result || []).filter((e) => !e.isDeleted);
+
+        setEmployees(employeeList);
+      } catch {
+        //
+      }
+    };
+
+    loadEmployees();
   }, [isAdmin]);
 
   if (loading) return <Loading size="xl" />;
