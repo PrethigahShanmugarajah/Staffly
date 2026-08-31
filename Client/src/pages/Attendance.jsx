@@ -1,27 +1,42 @@
 // Client / src / pages / Attendance.jsx
 import { useCallback, useEffect, useState } from "react";
-import { dummyAttendanceData } from "../assets/assets";
 import Loading from "../components/Loading";
 import CheckInButton from "../components/Attendance/CheckInButton";
 import AttendanceStats from "../components/Attendance/AttendanceStats";
 import AttendanceHistory from "../components/Attendance/AttendanceHistory";
 import PageHeader from "../components/PageHeader";
+import { fetchAttendanceService } from "../services/fetch";
 
 const Attendance = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [isDeleted, setIsDeleted] = useState(false);
 
+  // const fetchData = useCallback(async () => {
+  //   try {
+  //     const res = await api.get("/api/attendance");
+  //     const json = res.data;
+  //     setHistory(json.data || []);
+  //     if (json.employee?.isDeleted) setIsDeleted(true);
+  //   } catch (error) {
+  //     toast.error(error?.response?.data?.error || error?.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, []);
+
   const fetchData = useCallback(async () => {
-    setHistory(dummyAttendanceData);
-    setTimeout(() => {
+    try {
+      const data = await fetchAttendanceService();
+
+      setHistory(data.data || []);
+      if (data.employee?.isDeleted) setIsDeleted(true);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, [fetchData]);
 

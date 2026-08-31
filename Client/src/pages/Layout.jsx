@@ -1,8 +1,16 @@
 // Client / src / pages / Layout.jsx
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import { useAppContext } from "../context/appContext";
+import Loading from "../components/Loading";
 
 const Layout = () => {
+  const { user, loading } = useAppContext();
+
+  if (loading) return <Loading size="xl" />;
+
+  if (!user) return <Navigate to="/login" />;
+
   return (
     <div className="flex h-screen bg-linear-to-br from-gray-50 via-white to-teal-50/30">
       <Sidebar />

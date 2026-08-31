@@ -6,10 +6,9 @@ import Button from "../Button";
 import { SelectInput } from "../FormField/SelectInput";
 import { InputField } from "../FormField/InputField";
 import { TextAreaField } from "../FormField/TextAreaField";
+import { createLeaveApplicationService } from "../../services/mutations";
 
-// eslint-disable-next-line no-unused-vars
 const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [leaveType, setLeaveType] = useState("");
 
@@ -20,6 +19,27 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    // try {
+    //   await api.post("/api/leaveApplication", data);
+    //   onSuccess();
+    //   onClose();
+    // } catch (error) {
+    //   toast.error(error.response?.data?.error || error?.message);
+    // } finally {
+    //   setLoading(false);
+    // }
+
+    try {
+      await createLeaveApplicationService(data);
+      onSuccess();
+      onClose();
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!open) return null;
@@ -182,7 +202,6 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
             />
 
             {/* <button
-              onClick={onClose}
               disabled={loading}
               type="submit"
               className="bg-linear-to-r from-teal-600 to-teal-500 text-white px-5 py-2.5 rounded-md text-sm hover:from-teal-700 hover:to-teal-600 transition-all duration-200 shadow-md shadow-teal-500/25 active:scale-[0.98] flex-1 flex items-center justify-center gap-2"
@@ -197,7 +216,6 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
             </button> */}
 
             <Button
-              onClick={onClose}
               disabled={loading}
               type="submit"
               iconLeft={

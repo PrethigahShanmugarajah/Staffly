@@ -3,6 +3,7 @@ import { PencilIcon, Trash2Icon } from "lucide-react";
 import Button from "../Button";
 import { useState } from "react";
 import ConfirmPopup from "../ConfirmPopup";
+import { deleteEmployeeService } from "../../services/mutations";
 
 const EmployeeCard = ({ employee, onDelete, onEdit }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -12,15 +13,37 @@ const EmployeeCard = ({ employee, onDelete, onEdit }) => {
   //   if (!confirm("Are you sure want o delete this employee?")) return;
   // };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     setShowDeletePopup(true);
   };
 
+  // const handleConfirmDelete = async () => {
+  //   setDeleteLoading(true);
+
+  //   try {
+  //     await api.delete(`/api/employees/${employee.id}`);
+
+  //     setShowDeletePopup(false);
+  //     onDelete();
+  //   } catch (error) {
+  //     toast.error(error.response?.data?.error || error.message);
+  //   } finally {
+  //     setDeleteLoading(false);
+  //     setShowDeletePopup(false);
+  //   }
+  // };
+
   const handleConfirmDelete = async () => {
     setDeleteLoading(true);
-    await onDelete(employee);
-    setDeleteLoading(false);
-    setShowDeletePopup(false);
+
+    try {
+      await deleteEmployeeService(employee.id);
+
+      onDelete();
+    } finally {
+      setDeleteLoading(false);
+      setShowDeletePopup(false);
+    }
   };
 
   return (

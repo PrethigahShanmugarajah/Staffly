@@ -1,6 +1,5 @@
 // Client / src / pages / Employees.jsx
 import { useCallback, useEffect, useState } from "react";
-import { dummyEmployeeData } from "../assets/assets";
 import { Plus, Search, X } from "lucide-react";
 import { DEPARTMENTS } from "../constants/department";
 import Loading from "../components/Loading";
@@ -10,6 +9,7 @@ import EmployeeForm from "../components/Employee/EmployeeForm";
 import Button from "../components/Button";
 import { InputField } from "../components/FormField/InputField";
 import { SelectInput } from "../components/FormField/SelectInput";
+import { fetchEmployeesService } from "../services/fetch";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
@@ -19,20 +19,34 @@ const Employees = () => {
   const [editEmployee, setEditEmployee] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
+  // const fetchEmployees = useCallback(async () => {
+  //   try {
+  //     const url = selectedDept
+  //       ? `/api/employees?department=${selectedDept}`
+  //       : "/api/employees";
+
+  //     console.log("Selected Department:", selectedDept);
+  //     console.log("Employees API URL:", url);
+  //     const res = await api.get(url);
+  //     setEmployees(res.data.result);
+  //   } catch (error) {
+  //     console.error("Failed to fetch employees");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [selectedDept]);
+
   const fetchEmployees = useCallback(async () => {
-    setLoading(true);
-    setEmployees(
-      dummyEmployeeData.filter((emp) =>
-        selectedDept ? emp.department === selectedDept : emp,
-      ),
-    );
-    setTimeout(() => {
+    try {
+      const data = await fetchEmployeesService(selectedDept);
+
+      setEmployees(data.result);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   }, [selectedDept]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchEmployees();
   }, [fetchEmployees]);
 

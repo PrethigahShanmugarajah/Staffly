@@ -4,17 +4,46 @@ import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Button from "../Button";
 import { InputField } from "../FormField/InputField";
+import { changePasswordService } from "../../services/mutations";
 
 const ChangePasswordModal = ({ open, onClose }) => {
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [message, setMessage] = useState({ type: "", text: "" });
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const currentPassword = formData.get("currentPassword");
+    const newPassword = formData.get("newPassword");
+
+    // try {
+    //   const { data } = await api.put("/api/auth/change-password", {
+    //     currentPassword,
+    //     newPassword,
+    //   });
+
+    //   if (!data.success) throw new Error(data?.error || "Failed");
+    //   setMessage({ type: "success", text: "Password updated successfully!" });
+    //   e.target.reset();
+    // } catch (error) {
+    //   setMessage({ type: "error", text: error.message });
+    // } finally {
+
+    try {
+      const data = await changePasswordService({
+        currentPassword,
+        newPassword,
+      });
+
+      if (data?.success) {
+        e.target.reset();
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!open) return null;
@@ -52,23 +81,6 @@ const ChangePasswordModal = ({ open, onClose }) => {
         </div>
 
         <form className="p-6 space-y-5" onSubmit={handleSubmit}>
-          {message.text && (
-            <div
-              className={`p-3 rounded-xl text-sm flex items-start gap-3 ${
-                message.type === "success"
-                  ? "bg-green-50 text-green-700 border border-green-200"
-                  : "bg-red-50 text-red-700 border border-red-200"
-              }`}
-            >
-              <div
-                className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${
-                  message.type === "success" ? "bg-green-500" : "bg-red-500"
-                }`}
-              />
-              {message.text}
-            </div>
-          )}
-
           {/* <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Current Password

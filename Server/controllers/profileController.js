@@ -11,16 +11,24 @@ export const getProfile = async (req, res) => {
       return res.status(200).json({
         success: true,
         message: "Profile retrieved successfully.",
-        firstName: "Admin",
-        lastName: "",
-        email: session.email,
+        // firstName: "Admin",
+        // lastName: "",
+        // email: session.email,
+        profile: {
+          firstName: "Admin",
+          lastName: "",
+          email: session.email,
+          position: "Admin",
+          bio: "",
+          isDeleted: false,
+        },
       });
     }
 
     return res.status(200).json({
       success: true,
       message: "Profile retrieved successfully.",
-      employee,
+      profile: employee,
     });
   } catch (error) {
     console.error(
@@ -61,7 +69,7 @@ export const updateProfile = async (req, res) => {
     const updatedEmployee = await Employee.findByIdAndUpdate(
       employee._id,
       { bio: req.body.bio },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     return res.status(200).json({

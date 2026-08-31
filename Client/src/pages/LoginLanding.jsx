@@ -1,9 +1,17 @@
 // Client / src / pages / LoginLanding.jsx
 import LoginLeftSide from "../components/Login/LoginLeftSide";
 import { ArrowRightIcon, ShieldIcon, UserIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useAppContext } from "../context/appContext";
+import Loading from "../components/Loading";
 
 const LoginLanding = () => {
+  const { user, loading } = useAppContext();
+
+  if (loading) return <Loading size="xl" />;
+
+  if (user) return <Navigate to="/" />;
+
   const portalOptions = [
     {
       to: "/login/admin",

@@ -6,11 +6,10 @@ import { ClipLoader } from "react-spinners";
 import Button from "../Button";
 import { SelectInput } from "../FormField/SelectInput";
 import { InputField } from "../FormField/InputField";
+import { createPayslipService } from "../../services/mutations";
 
-// eslint-disable-next-line no-unused-vars
 const GeneratePayslipForm = ({ employees, onSuccess }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
   const [month, setMonth] = useState("");
@@ -35,6 +34,27 @@ const GeneratePayslipForm = ({ employees, onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    // try {
+    //   await api.post("/api/payslips", data);
+    //   setIsOpen(false);
+    // } catch (error) {
+    //   toast.error(error.response?.data?.error || error?.message);
+    // } finally {
+    //   setLoading(false);
+    // }
+
+    try {
+      await createPayslipService(data);
+      await onSuccess?.();
+      setIsOpen(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -81,7 +101,7 @@ const GeneratePayslipForm = ({ employees, onSuccess }) => {
             name="employeeId"
             required
             options={employees.map((e) => ({
-              value: e.id,
+              value: e._id || e.id,
               label: `${e.firstName} ${e.lastName} (${e.position})`,
             }))}
             placeholder="Select Employee"

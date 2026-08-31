@@ -1,6 +1,5 @@
 // Client / src / pages / Leave.jsx
 import { useCallback, useEffect, useState } from "react";
-import { dummyLeaveData } from "../assets/assets";
 import Loading from "../components/Loading";
 import {
   PalmtreeIcon,
@@ -13,25 +12,44 @@ import ApplyLeaveModal from "../components/Leave/ApplyLeaveModal";
 import PageHeader from "../components/PageHeader";
 import StatsCard from "../components/StatsCard";
 import Button from "../components/Button";
+import { useAppContext } from "../context/appContext";
+import { fetchLeaveApplicationsService } from "../services/fetch";
 
 const Leave = () => {
   const [leaves, setLeaves] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [isDeleted, setIsDeleted] = useState(false);
 
-  const isAdmin = false;
+  const { user } = useAppContext();
 
-  const fetchLeaves = useCallback(() => {
-    setLeaves(dummyLeaveData);
-    setTimeout(() => {
+  const isAdmin = user?.role === "ADMIN";
+
+  // const fetchLeaves = useCallback(async () => {
+  //   try {
+  //     const res = await api.get("/api/leaveApplication");
+  //     setLeaves(res.data.data || []);
+  //     if (res.data.employee?.isDeleted) setIsDeleted(true);
+  //   } catch (error) {
+  //     toast.error(error?.response?.data?.error || error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, []);
+
+  const fetchLeaves = useCallback(async () => {
+    try {
+      const data = await fetchLeaveApplicationsService();
+
+      setLeaves(data?.data || []);
+
+      if (data?.employee?.isDeleted) setIsDeleted(true);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchLeaves();
   }, [fetchLeaves]);
 
