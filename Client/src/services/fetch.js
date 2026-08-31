@@ -168,3 +168,57 @@ export const fetchAttendanceService = async () => {
     throw error;
   }
 };
+
+/* -------- Fetch Payslips -------- */
+export const fetchPayslipsService = async () => {
+  try {
+    const { data } = await api.get(API_ROUTES.PAYSLIPS.BASE);
+
+    console.log("Fetch Payslips API Response:", data);
+
+    if (data?.success) {
+      // toast.success(data?.message);
+      console.log("Fetch Payslips Success:", data?.message);
+    } else {
+      toast(data?.message || "Fetch payslips with warning");
+      console.warn(
+        "Fetch Payslips Warning:",
+        data?.message || "Fetch Payslips Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Fetch Payslips Error:", error);
+
+    throw error;
+  }
+};
+
+/* -------- Fetch Payslip By ID -------- */
+export const fetchPayslipByIDService = async (id) => {
+  try {
+    const { data } = await api.get(`${API_ROUTES.PAYSLIPS.BASE}/${id}`);
+
+    console.log("Fetch Payslip By ID API Response:", data);
+
+    if (data?.success) {
+      // toast.success(data?.message);
+      console.log("Fetch Payslip By ID Success:", data?.message);
+    } else {
+      toast(data?.message || "Fetch payslip by ID with warning");
+      console.warn(
+        "Fetch Payslip By ID Warning:",
+        data?.message || "Fetch Payslip By ID Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Fetch Payslip By ID Error:", error);
+
+    throw error;
+  }
+};
