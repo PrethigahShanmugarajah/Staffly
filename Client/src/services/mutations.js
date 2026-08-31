@@ -170,3 +170,30 @@ export const updateLeaveApplicationStatusService = async (id, payload) => {
     throw error;
   }
 };
+
+/* -------- Clock In/Out Employee -------- */
+export const clockInOutService = async () => {
+  try {
+    const { data } = await api.post(API_ROUTES.ATTENDANCE.BASE);
+
+    console.log("Clock In/Out Employee API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Clock In/Out Employee Success:", data?.message);
+    } else {
+      toast(data?.message || "Clock in/out employee with warning");
+      console.warn(
+        "Clock In/Out Employee Warning:",
+        data?.message || "Clock In/Out Employee Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Clock In/Out Employee Error:", error);
+
+    throw error;
+  }
+};
