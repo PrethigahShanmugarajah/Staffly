@@ -17,6 +17,9 @@ const API_ROUTES = {
   LEAVE_APPLICATION: {
     BASE: "/api/leaveApplication",
   },
+  ATTENDANCE: {
+    BASE: "/api/attendance",
+  },
 };
 
 export default API_ROUTES;
