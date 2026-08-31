@@ -5,18 +5,27 @@ import { ClipLoader } from "react-spinners";
 import Button from "../Button";
 import { InputField } from "../FormField/InputField";
 import { TextAreaField } from "../FormField/TextAreaField";
+import { updateProfileService } from "../../services/mutations";
+import { useAppContext } from "../../context/appContext";
 
-// eslint-disable-next-line no-unused-vars
 const ProfileForm = ({ initialData, onSuccess }) => {
-  // eslint-disable-next-line no-unused-vars
+  const { user } = useAppContext();
+  const isAdmin = user?.role === "ADMIN";
+
   const [loading, setLoading] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    try {
+      // await api.put("/api/profile", formData);
+      await updateProfileService(formData);
+      onSuccess?.();
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,20 +37,6 @@ const ProfileForm = ({ initialData, onSuccess }) => {
         <User className="w-5 h-5 text-gray-400" /> Public Profile
       </h2>
 
-      {error && (
-        <div className="bg-red-50 text-red-700 p-4 rounded-xl text-sm border border-red-200 mb-6 flex items-start gap-3">
-          <div className="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0" />
-          {error}
-        </div>
-      )}
-
-      {message && (
-        <div className="bg-green-50 text-green-700 p-4 rounded-xl text-sm border border-red-200 mb-6 flex items-start gap-3">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
-          {message}
-        </div>
-      )}
-
       <div className="space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* <div>
@@ -52,7 +47,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             <input
               type="text"
               disabled
-              value={`${initialData.firstName} ${initialData.lastName}`}
+              value={`${initialData?.firstName || ""} ${initialData?.lastName || ""}`}
               className="bg-gray-50 text-gray-400 cursor-not-allowed"
             />
           </div> */}
@@ -62,7 +57,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             name="name"
             type="text"
             disabled
-            value={`${initialData.firstName} ${initialData.lastName}`}
+            value={`${initialData?.firstName || ""} ${initialData?.lastName || ""}`}
             labelPosition="top"
             size="xs"
             inputClassName="bg-gray-50! text-gray-400! cursor-not-allowed!"
@@ -76,7 +71,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             <input
               type="email"
               disabled
-              value={initialData.email}
+              value={initialData?.email || ""}
               className="bg-gray-50 text-gray-400 cursor-not-allowed"
             />
           </div> */}
@@ -86,7 +81,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             name="email"
             type="email"
             disabled
-            value={initialData.email}
+            value={initialData?.email || ""}
             labelPosition="top"
             size="xs"
             inputClassName="bg-gray-50! text-gray-400! cursor-not-allowed!"
@@ -100,7 +95,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             <input
               type="text"
               disabled
-              value={initialData.position}
+              value={initialData?.position || ""}
               className="bg-gray-50 text-gray-400 cursor-not-allowed"
             />
           </div> */}
@@ -111,7 +106,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
               name="position"
               type="text"
               disabled
-              value={initialData.position}
+              value={initialData?.position || ""}
               labelPosition="top"
               size="xs"
               inputClassName="bg-gray-50! text-gray-400! cursor-not-allowed!"
@@ -119,39 +114,41 @@ const ProfileForm = ({ initialData, onSuccess }) => {
           </div>
         </div>
 
-        <div>
-          {/* <label className="block text-sm font-medium text-gray-700 mb-2">
-            Bio
-          </label>
+        {!isAdmin && (
+          <div>
+            {/* <label className="block text-sm font-medium text-gray-700 mb-2">
+              Bio
+            </label>
 
-          <textarea
-            disabled={initialData.isDeleted}
-            name="bio"
-            defaultValue={initialData.bio || ""}
-            placeholder="Write your brief bio..."
-            className={`resize-none ${initialData.isDeleted ? "bg-gray-50 text-gray-400 cursor-not-allowed" : ""}`}
-          /> */}
+            <textarea
+              disabled={initialData?.isDeleted}
+              name="bio"
+              defaultValue={initialData?.bio || ""}
+              placeholder="Write your brief bio..."
+              className={`resize-none ${initialData?.isDeleted ? "bg-gray-50 text-gray-400 cursor-not-allowed" : ""}`}
+            /> */}
 
-          <TextAreaField
-            label="Bio"
-            name="bio"
-            defaultValue={initialData.bio || ""}
-            placeholder="Write your brief bio..."
-            disabled={initialData.isDeleted}
-            labelPosition="top"
-            textareaClassName={
-              initialData.isDeleted
-                ? "bg-gray-50! text-gray-400! cursor-not-allowed!"
-                : ""
-            }
-          />
+            <TextAreaField
+              label="Bio"
+              name="bio"
+              defaultValue={initialData?.bio || ""}
+              placeholder="Write your brief bio..."
+              disabled={initialData?.isDeleted}
+              labelPosition="top"
+              textareaClassName={
+                initialData?.isDeleted
+                  ? "bg-gray-50! text-gray-400! cursor-not-allowed!"
+                  : ""
+              }
+            />
 
-          <p className="text-xs text-gray-400 mt-1.5">
-            This will be displayed on your profile.
-          </p>
-        </div>
+            <p className="text-xs text-gray-400 mt-1.5">
+              This will be displayed on your profile.
+            </p>
+          </div>
+        )}
 
-        {initialData.isDeleted ? (
+        {isAdmin ? null : initialData?.isDeleted ? (
           <div className="pt-2">
             <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-center">
               <p className="text-red-600 font-medium tracking-tight">
