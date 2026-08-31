@@ -1,11 +1,11 @@
 // Client / src / pages / PrintPayslip.jsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { dummyPayslipData } from "../assets/assets";
 import Loading from "../components/Loading";
 import { format } from "date-fns";
 import { useAppContext } from "../context/appContext";
 import Button from "../components/Button";
+import { fetchPayslipByIDService } from "../services/fetch";
 
 const PrintPayslip = () => {
   const { id } = useParams();
@@ -14,12 +14,19 @@ const PrintPayslip = () => {
 
   const { CURRENCY } = useAppContext();
 
+  // useEffect(() => {
+  //   api
+  //     .get(`/api/payslips/${id}`)
+  //     .then((res) => setPayslip(res.data.result))
+  //     .catch(console.error)
+  //     .finally(() => setLoading(false));
+  // }, [id]);
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setPayslip(dummyPayslipData.find((slip) => slip._id === id));
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    fetchPayslipByIDService(id)
+      .then((data) => setPayslip(data?.result))
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, [id]);
 
   if (loading) return <Loading size="xxl" />;
@@ -35,7 +42,10 @@ const PrintPayslip = () => {
         </h1>
 
         <p className="text-gray-500 text-sm mt-1">
-          {format(new Date(payslip.year, payslip.month - 1), "MMMM yyyy")}
+          {format(
+            new Date(Number(payslip.year), Number(payslip.month) - 1),
+            "MMMM yyyy",
+          )}
         </p>
       </div>
 
