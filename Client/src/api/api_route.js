@@ -4,6 +4,7 @@ const API_ROUTES = {
   AUTH: {
     SESSION: "/api/auth/session",
     LOGIN: "/api/auth/login",
+    CHANGE_PASSWORD: "/api/auth/change-password",
   },
   PROFILE: {
     BASE: "/api/profile",
