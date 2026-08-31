@@ -38,8 +38,8 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchProfileService().then((data) => {
-      const firstName = data?.employee?.firstName || data?.firstName;
-      const lastName = data?.employee?.lastName || data?.lastName;
+      const firstName = data?.profile?.firstName || data?.firstName;
+      const lastName = data?.profile?.lastName || data?.lastName;
 
       if (firstName) {
         const fullName = `${firstName} ${lastName || ""}`.trim();
