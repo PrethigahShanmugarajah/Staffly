@@ -224,3 +224,57 @@ export const createPayslipService = async (payload) => {
     throw error;
   }
 };
+
+/* -------- Update Profile -------- */
+export const updateProfileService = async (payload) => {
+  try {
+    const { data } = await api.put(API_ROUTES.PROFILE.BASE, payload);
+
+    console.log("Update Profile API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Update Profile Success:", data?.message);
+    } else {
+      toast(data?.message || "Update profile with warning");
+      console.warn(
+        "Update Profile Warning:",
+        data?.message || "Update Profile Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Update Profile Error:", error);
+
+    throw error;
+  }
+};
+
+/* -------- Change Password -------- */
+export const changePasswordService = async (payload) => {
+  try {
+    const { data } = await api.put(API_ROUTES.AUTH.CHANGE_PASSWORD, payload);
+
+    console.log("Change Password API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Change Password Success:", data?.message);
+    } else {
+      toast(data?.message || "Change password with warning");
+      console.warn(
+        "Change Password Warning:",
+        data?.message || "Change Password Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Change Password Error:", error);
+
+    throw error;
+  }
+};
