@@ -197,3 +197,30 @@ export const clockInOutService = async () => {
     throw error;
   }
 };
+
+/* -------- Create Payslip -------- */
+export const createPayslipService = async (payload) => {
+  try {
+    const { data } = await api.post(API_ROUTES.PAYSLIPS.BASE, payload);
+
+    console.log("Create Payslip API Response:", data);
+
+    if (data?.success) {
+      toast.success(data?.message);
+      console.log("Create Payslip Success:", data?.message);
+    } else {
+      toast(data?.message || "Create payslip with warning");
+      console.warn(
+        "Create Payslip Warning:",
+        data?.message || "Create Payslip Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Create Payslip Error:", error);
+
+    throw error;
+  }
+};
