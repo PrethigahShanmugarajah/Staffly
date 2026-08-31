@@ -141,3 +141,30 @@ export const fetchLeaveApplicationsService = async () => {
     throw error;
   }
 };
+
+/* -------- Fetch Attendance -------- */
+export const fetchAttendanceService = async () => {
+  try {
+    const { data } = await api.get(API_ROUTES.ATTENDANCE.BASE);
+
+    console.log("Fetch Attendance API Response:", data);
+
+    if (data?.success) {
+      // toast.success(data?.message);
+      console.log("Fetch Attendance Success:", data?.message);
+    } else {
+      toast(data?.message || "Fetch attendance with warning");
+      console.warn(
+        "Fetch Attendance Warning:",
+        data?.message || "Fetch Attendance Warning",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || error?.message);
+    console.error("Fetch Attendance Error:", error);
+
+    throw error;
+  }
+};
