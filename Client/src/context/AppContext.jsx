@@ -1,4 +1,3 @@
-// Client / src / context / AppContext.jsx
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "./appContext";
 import { useEffect, useState } from "react";

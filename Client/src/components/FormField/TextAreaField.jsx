@@ -1,4 +1,4 @@
-// Client / src / components / FormField / TextAreaField.jsx
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState } from "react";
 
 const SIZE_CONFIG = {
@@ -61,7 +61,6 @@ export const TextAreaField = ({
     });
 
     return out;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size]);
 
   const hasResponsive = rules.some((r) => r.bp !== "base");
@@ -83,7 +82,6 @@ export const TextAreaField = ({
       if (vw >= (BP_MIN[r.bp] ?? 0)) picked = r.value;
     });
     return picked;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rules, vw]);
 
   const s = getSize(resolvedSize);

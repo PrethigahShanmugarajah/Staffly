@@ -1,4 +1,3 @@
-// Client / src / components / Attendance / CheckInButton.jsx
 import { LogInIcon, LogOutIcon } from "lucide-react";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
@@ -12,7 +11,6 @@ const CheckInButton = ({ todayRecord, onAction }) => {
     setLoading(true);
 
     try {
-      // await api.post("/api/attendance");
       await clockInOutService();
       onAction();
     } finally {
@@ -36,34 +34,6 @@ const CheckInButton = ({ todayRecord, onAction }) => {
 
   return (
     <div className="absolute bottom-4 right-4 flex flex-col z-1">
-      {/* <button
-        onClick={handleAttendance}
-        disabled={loading}
-        className={`w-full max-w-xs flex justify-between items-center gap-8 p-4 rounded-xl bg-linear-to-br text-white ${
-          isCheckedIn
-            ? "from-gray-700 to-gray-700"
-            : "from-teal-600 to-teal-700"
-        }`}
-      >
-        {loading ? (
-          <ClipLoader size={20} color="#FFFFFF" />
-        ) : isCheckedIn ? (
-          <LogOutIcon className="size-7" />
-        ) : (
-          <LogInIcon className="size-7" />
-        )}
-
-        <div className="relative flex flex-col items-center text-center">
-          <h2 className="text-lg font-medium mb-1">
-            {loading ? "Processing..." : isCheckedIn ? "Clock Out" : "Clock In"}
-          </h2>
-
-          <p className="text-xs opacity-80">
-            {isCheckedIn ? "Click to end your shift" : "Start your work day"}
-          </p>
-        </div>
-      </button> */}
-
       <Button
         onClick={handleAttendance}
         disabled={loading}

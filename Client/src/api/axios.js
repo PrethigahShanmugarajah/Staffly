@@ -1,6 +1,6 @@
-// Client / src / api / axios.js
 import axios from "axios";
 
+/* -------- Create Axios Instance -------- */
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });

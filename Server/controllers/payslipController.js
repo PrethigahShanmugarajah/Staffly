@@ -1,4 +1,3 @@
-// Server / controllers / payslipController.js
 import Employee from "../models/Employee.js";
 import Payslip from "../models/Payslip.js";
 
@@ -7,13 +6,6 @@ export const createPayslip = async (req, res) => {
   try {
     const { employeeId, month, year, basicSalary, allowances, deductions } =
       req.body;
-
-    // if (!employeeId || !month || !year || !basicSalary) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Please provide all required payslip fields.",
-    //   });
-    // }
 
     if (!employeeId) {
       return res.status(400).json({

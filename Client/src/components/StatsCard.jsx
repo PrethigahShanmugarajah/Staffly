@@ -1,5 +1,3 @@
-// Client / src / components / StatsCard.jsx
-
 const StatsCard = ({ icon: Icon, value, title, suffix }) => {
   return (
     <div className="bg-white rounded-lg border border-gray-200/70 hover:-translate-y-0.5 transition-all duration-300 p-5 sm:p-6 flex items-center gap-4 relative overflow-hidden group cursor-pointer">

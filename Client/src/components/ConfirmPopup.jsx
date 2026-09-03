@@ -1,4 +1,3 @@
-// Client / src / components / ConfirmPopup.jsx
 import { X } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import Button from "./Button";

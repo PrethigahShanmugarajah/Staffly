@@ -1,4 +1,3 @@
-// Server / models / Employee.js
 import mongoose from "mongoose";
 import { DEPARTMENTS } from "../constants/department.js";
 

@@ -1,4 +1,3 @@
-// Server / controllers / employeeController.js
 import Employee from "../models/Employee.js";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
@@ -10,11 +9,6 @@ export const getEmployees = async (req, res) => {
     const { department } = req.query;
     const where = {};
     if (department) where.department = department;
-
-    // const employees = (await Employee.find(where))
-    //   .toSorted({ createdAt: -1 })
-    //   .populate("userId", "email role")
-    //   .lean();
 
     const employees = await Employee.find(where)
       .sort({ createdAt: -1 })
@@ -71,13 +65,6 @@ export const createEmployee = async (req, res) => {
       role,
       bio,
     } = req.body;
-
-    // if (!email || !password || !firstName || !lastName) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Please provide all required employee fields.",
-    //   });
-    // }
 
     if (!email) {
       return res.status(400).json({
@@ -230,13 +217,11 @@ export const updateEmployee = async (req, res) => {
         email,
         phone,
         position,
-        // department: department || "Engineering",
         department,
         basicSalary: Number(basicSalary) || 0,
         allowances: Number(allowances) || 0,
         deductions: Number(deductions) || 0,
-        // employmentStatus: employmentStatus || "ACTIVE",
-        employmentStatus,
+        employmentStatus: employmentStatus || "ACTIVE",
         bio: bio || "",
       },
       { new: true },
@@ -271,7 +256,6 @@ export const deleteEmployee = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // const employee = await Employee.findById(id);
     const employee = await Employee.findOne({ _id: id, isDeleted: false });
 
     if (!employee) {

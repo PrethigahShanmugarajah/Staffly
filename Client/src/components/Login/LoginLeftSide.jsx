@@ -1,5 +1,3 @@
-// Client / src / components / Login / LoginLeftSide.jsx
-
 const LoginLeftSide = () => {
   return (
     <div className="hidden md:flex w-1/2 bg-teal-950 relative overflow-hidden border-r border-gray-200">

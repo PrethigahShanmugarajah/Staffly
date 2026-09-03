@@ -1,4 +1,3 @@
-// Server / middleware / auth.js
 import jwt from "jsonwebtoken";
 
 /* -------- Fix JWT authentication error handling -------- */

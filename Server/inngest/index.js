@@ -1,4 +1,3 @@
-// Server / inngest / index.js
 import { Inngest } from "inngest";
 import Attendance from "../models/Attendance.js";
 import Employee from "../models/Employee.js";

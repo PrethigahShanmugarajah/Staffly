@@ -1,4 +1,3 @@
-// Server / models / Payslip.js
 import mongoose from "mongoose";
 
 const payslipSchema = new mongoose.Schema(

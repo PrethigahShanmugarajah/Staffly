@@ -1,5 +1,3 @@
-// Client / src / components / PageHeader.jsx
-
 const PageHeader = ({ title, subtitle }) => {
   return (
     <div className="mb-8">

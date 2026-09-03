@@ -1,4 +1,3 @@
-// Client / src / pages / PrintPayslip.jsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -13,14 +12,6 @@ const PrintPayslip = () => {
   const [loading, setLoading] = useState(true);
 
   const { CURRENCY } = useAppContext();
-
-  // useEffect(() => {
-  //   api
-  //     .get(`/api/payslips/${id}`)
-  //     .then((res) => setPayslip(res.data.result))
-  //     .catch(console.error)
-  //     .finally(() => setLoading(false));
-  // }, [id]);
 
   useEffect(() => {
     fetchPayslipByIDService(id)
@@ -142,13 +133,6 @@ const PrintPayslip = () => {
       </div>
 
       <div className="text-center flex justify-center">
-        {/* <button
-          className="bg-linear-to-r from-teal-600 to-teal-500 text-white px-5 py-2.5 rounded-md text-sm hover:from-teal-700 hover:to-teal-600 transition-all duration-200 shadow-md shadow-teal-500/25 active:scale-[0.98] print:hidden"
-          onClick={() => window.print()}
-        >
-          Print Payslip
-        </button> */}
-
         <Button
           text="Print Payslip"
           onClick={() => window.print()}

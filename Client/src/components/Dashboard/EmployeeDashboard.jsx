@@ -1,4 +1,3 @@
-// Client / src / components / Dashboard / EmployeeDashboard.jsx
 import {
   ArrowRightIcon,
   CalendarIcon,
@@ -39,39 +38,12 @@ const EmployeeDashboard = ({ data }) => {
 
   return (
     <div className="animate-fade-in">
-      {/* <div className="page-header">
-        <h1 className="page-title">Welcome, {emp?.firstName}!</h1>
-
-        <p className="page-subtitle">
-          {emp?.position} - {emp?.department || "No Department"}
-        </p>
-      </div> */}
-
       <PageHeader
         title={`Welcome, ${emp?.firstName}!`}
         subtitle={`${emp?.position} - ${emp?.department || "No Department"}`}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8">
-        {/* {cards.map((card, index) => (
-          <div
-            key={index}
-            className="card card-hover p-5 sm:p-6 relative overflow-hidden group flex items-center justify-between"
-          >
-            <div>
-              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-gray-500/70 group-hover:bg-teal-500/70" />
-
-              <p className="text-sm font-medium text-gray-700">{card.title}</p>
-
-              <p className="text-2xl font-bold text-gray-900 mt-1">
-                {card.value}
-              </p>
-            </div>
-
-            <card.icon className="size-10 p-2.5 rounded-lg bg-gray-100 text-gray-600 group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors duration-200" />
-          </div>
-        ))} */}
-
         {cards.map((card, index) => (
           <StatsCard
             key={index}
@@ -85,12 +57,15 @@ const EmployeeDashboard = ({ data }) => {
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           to="/attendance"
-          className="btn-primary text-center inline-flex items-center justify-center gap-2"
+          className="bg-linear-to-r from-teal-600 to-teal-500 text-white px-5 py-2.5 rounded-md text-sm hover:from-teal-700 hover:to-teal-600 transition-all duration-200 shadow-md shadow-teal-500/25 active:scale-[0.98] text-center inline-flex items-center justify-center gap-2"
         >
           Mark Attendance <ArrowRightIcon className="w-4 h-4" />
         </Link>
 
-        <Link to="/leave" className="btn-secondary text-center">
+        <Link
+          to="/leave"
+          className="bg-white text-gray-700 border border-gray-200 px-5 py-2.5 rounded-md text-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 text-center"
+        >
           Apply for Leave
         </Link>
       </div>

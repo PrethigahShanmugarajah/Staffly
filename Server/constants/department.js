@@ -1,5 +1,3 @@
-// Server / constants / department.js
-
 export const DEPARTMENTS = [
   "Engineering",
   "Human Resources",

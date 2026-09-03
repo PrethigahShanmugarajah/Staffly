@@ -1,4 +1,3 @@
-// Server / routes / employeeRoutes.js
 import { Router } from "express";
 import {
   createEmployee,

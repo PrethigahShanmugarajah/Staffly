@@ -1,4 +1,3 @@
-// Client / src / components / Leave / LeaveHistory.jsx
 import { format } from "date-fns";
 import { Check, X } from "lucide-react";
 import { useState } from "react";
@@ -8,14 +7,9 @@ import { updateLeaveApplicationStatusService } from "../../services/mutations";
 import ConfirmPopup from "../ConfirmPopup";
 
 const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
-  // const [processing, setProcessing] = useState(null);
   const [processingApprove, setProcessingApprove] = useState(false);
   const [processingReject, setProcessingReject] = useState(false);
   const [confirmAction, setConfirmAction] = useState(null);
-
-  // const handleStatusUpdate = async (id, status) => {
-  //   setProcessing(id);
-  // };
 
   const handleStatusUpdate = async (id, status) => {
     if (status === "APPROVED") {
@@ -25,12 +19,9 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
     }
 
     try {
-      // await api.patch(`/api/leaveApplication/${id}`, { status });
       await updateLeaveApplicationStatusService(id, { status });
       onUpdate();
     } finally {
-      // setProcessingApprove(null);
-      // setProcessingReject(null);
       setProcessingApprove(false);
       setProcessingReject(false);
     }
@@ -112,23 +103,6 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                       <td className="px-6 py-4">
                         {leave.status === "PENDING" && (
                           <div className="flex justify-center gap-2">
-                            {/* <button
-                              disabled={!!processing}
-                              onClick={() =>
-                                handleStatusUpdate(
-                                  leave._id || leave.id,
-                                  "APPROVED",
-                                )
-                              }
-                              className="p-1.5 rounded-md bg-green-50 text-green-600 hover:bg-green-100 transition-colors"
-                            >
-                              {processing === (leave._id || leave.id) ? (
-                                <ClipLoader size={20} color="#FFFFFF" />
-                              ) : (
-                                <Check className="w-4 h-4" />
-                              )}
-                            </button> */}
-
                             <Button
                               disabled={processingApprove || processingReject}
                               onClick={() =>
@@ -153,23 +127,6 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                               }
                               className="p-1.5! bg-green-50! text-green-600! hover:bg-green-100! transition-colors!"
                             />
-
-                            {/* <button
-                              onClick={() =>
-                                handleStatusUpdate(
-                                  leave._id || leave.id,
-                                  "REJECTED",
-                                )
-                              }
-                              disabled={!!processing}
-                              className="p-1.5 rounded-md bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
-                            >
-                              {processing === (leave._id || leave.id) ? (
-                                <ClipLoader size={20} color="#FFFFFF" />
-                              ) : (
-                                <X className="w-4 h-4" />
-                              )}
-                            </button> */}
 
                             <Button
                               onClick={() =>

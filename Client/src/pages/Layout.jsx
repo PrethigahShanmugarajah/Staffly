@@ -1,4 +1,3 @@
-// Client / src / pages / Layout.jsx
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { useAppContext } from "../context/appContext";

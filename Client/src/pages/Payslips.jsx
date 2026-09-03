@@ -1,4 +1,3 @@
-// Client / src / pages / Payslips.jsx
 import { useCallback, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import PayslipList from "../components/Payslips/PayslipList";
@@ -15,17 +14,6 @@ const Payslips = () => {
   const { user } = useAppContext();
   const isAdmin = user?.role === "ADMIN";
 
-  // const fetchPayslips = useCallback(async () => {
-  //   try {
-  //     const res = await api.get("/api/payslips");
-  //     setPayslips(res.data.data || []);
-  //   } catch (error) {
-  //     toast.error(error?.response?.data?.error || error?.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, []);
-
   const fetchPayslips = useCallback(async () => {
     try {
       const data = await fetchPayslipsService();
@@ -38,17 +26,6 @@ const Payslips = () => {
   useEffect(() => {
     fetchPayslips();
   }, [fetchPayslips]);
-
-  // useEffect(() => {
-  //   if (isAdmin)
-  //     // api
-  //     //   .get("/api/employees")
-  //     fetchEmployeesService()
-  //       .then((res) => {
-  //         setEmployees((res.data.result || []).filter((e) => !e.isDeleted));
-  //       })
-  //       .catch(() => {});
-  // }, [isAdmin]);
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -73,18 +50,6 @@ const Payslips = () => {
   return (
     <div className="animate-fade-in">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-        {/* <div>
-          <h1 className="text-2xl font-medium text-gray-900 tracking-tight">
-            Payslips
-          </h1>
-
-          <p className="text-gray-500 text-sm mt-1">
-            {isAdmin
-              ? "Generate and manage employee payslips"
-              : "Your payslip history"}
-          </p>
-        </div> */}
-
         <PageHeader
           title="Payslips"
           subtitle={

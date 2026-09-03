@@ -1,4 +1,3 @@
-// Server / routes / leaveApplicationRoutes.js
 import { Router } from "express";
 import {
   createLeave,

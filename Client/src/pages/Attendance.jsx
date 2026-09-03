@@ -1,4 +1,3 @@
-// Client / src / pages / Attendance.jsx
 import { useCallback, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import CheckInButton from "../components/Attendance/CheckInButton";
@@ -11,19 +10,6 @@ const Attendance = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
-
-  // const fetchData = useCallback(async () => {
-  //   try {
-  //     const res = await api.get("/api/attendance");
-  //     const json = res.data;
-  //     setHistory(json.data || []);
-  //     if (json.employee?.isDeleted) setIsDeleted(true);
-  //   } catch (error) {
-  //     toast.error(error?.response?.data?.error || error?.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, []);
 
   const fetchData = useCallback(async () => {
     try {
@@ -50,16 +36,6 @@ const Attendance = () => {
 
   return (
     <div className="animate-fade-in">
-      {/* <div className="mb-8">
-        <h1 className="text-2xl font-medium text-gray-900 tracking-tight">
-          Attendance
-        </h1>
-
-        <p className="text-gray-500 text-sm mt-1">
-          Track your work hours and daily check-ins
-        </p>
-      </div> */}
-
       <PageHeader
         title="Attendance"
         subtitle="Track your work hours and daily check-ins"

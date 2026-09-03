@@ -1,4 +1,3 @@
-// Client / src / components / Loading.jsx
 import { useEffect } from "react";
 import { useAppContext } from "../context/appContext";
 

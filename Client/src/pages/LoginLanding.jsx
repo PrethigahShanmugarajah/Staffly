@@ -1,4 +1,3 @@
-// Client / src / pages / LoginLanding.jsx
 import LoginLeftSide from "../components/Login/LoginLeftSide";
 import { ArrowRightIcon, ShieldIcon, UserIcon } from "lucide-react";
 import { Link, Navigate } from "react-router-dom";
