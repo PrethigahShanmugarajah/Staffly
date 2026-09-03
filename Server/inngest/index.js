@@ -18,9 +18,15 @@ const autoCheckOut = inngest.createFunction(
     const { employeeId, attendanceId } = event.data;
 
     /* -------- Wait for 9 Hours -------- */
+    // await step.sleepUntil(
+    //   "wait-for-the-9-hours",
+    //   new Date(new Date().getTime() + 9 * 60 * 60 * 1000),
+    // );
+
+    /* -------- Wait for 10 Minutes -------- */
     await step.sleepUntil(
-      "wait-for-the-9-hours",
-      new Date(new Date().getTime() + 9 * 60 * 60 * 1000),
+      "wait-for-the-10-minutes",
+      new Date(new Date().getTime() + 10 * 60 * 1000),
     );
 
     /* -------- Get Attendance Data -------- */
@@ -84,9 +90,14 @@ const leaveApplicationReminder = inngest.createFunction(
     const { leaveApplicationId } = event.data;
 
     /* -------- Wait for 24 Hours -------- */
+    // await step.sleepUntil(
+    //   "wait-for-the-24-hours",
+    //   new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+    // );
+    /* -------- Wait for 2 Minutes -------- */
     await step.sleepUntil(
-      "wait-for-the-24-hours",
-      new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+      "wait-for-the-2-minutes",
+      new Date(new Date().getTime() + 2 * 60 * 1000),
     );
 
     const leaveApplication =
