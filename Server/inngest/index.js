@@ -136,7 +136,7 @@ const attendanceReminderCron = inngest.createFunction(
   {
     id: "attendance-reminder-cron",
     // triggers: [{ cron: "TZ=Asia/Colombo 30 11 * * *" }],
-    triggers: [{ cron: "TZ=Asia/Colombo 18 18 * * *" }],
+    triggers: [{ cron: "TZ=Asia/Colombo 18 59 * * *" }],
   },
   async ({ step }) => {
     /* -------- Step 1: Get today's date range(IST) -------- */
@@ -208,7 +208,7 @@ const attendanceReminderCron = inngest.createFunction(
           
               <p style='font-size: 16px;'>We noticed you haven't marked your attendance yet today.</p>
           
-              <p style='font-size: 16px;'>The deadline was <strong>6:18 PM</strong> and your attendance is still missing.</p>
+              <p style='font-size: 16px;'>The deadline was <strong>6:59 PM</strong> and your attendance is still missing.</p>
 
               <p style='font-size: 16px;'>Please check in as soon as possible or contact your admin if you're facing any issues.</p>
 
