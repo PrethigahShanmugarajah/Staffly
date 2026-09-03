@@ -124,7 +124,8 @@ const leaveApplicationReminder = inngest.createFunction(
 const attendanceReminderCron = inngest.createFunction(
   {
     id: "attendance-reminder-cron",
-    triggers: [{ cron: "TZ=Asia/Colombo 30 11 * * *" }],
+    // triggers: [{ cron: "TZ=Asia/Colombo 30 11 * * *" }],
+    triggers: [{ cron: "TZ=Asia/Colombo 15 16 * * *" }],
   },
   async ({ step }) => {
     /* -------- Step 1: Get today's date range(IST) -------- */
@@ -187,7 +188,7 @@ const attendanceReminderCron = inngest.createFunction(
       await step.run("send-reminder-emails", async () => {
         const emailPromises = absentEmployees.map((emp) => {
           /* -------- Send Email -------- */
-          sendEmail({
+          return sendEmail({
             to: emp.email,
             subject: `Attendance Reminder - Please Mark Your Attendance`,
             body: `
@@ -196,7 +197,7 @@ const attendanceReminderCron = inngest.createFunction(
           
               <p style='font-size: 16px;'>We noticed you haven't marked your attendance yet today.</p>
           
-              <p style='font-size: 16px;'>The deadline was <strong>11:30 AM</strong> and your attendance is still missing.</p>
+              <p style='font-size: 16px;'>The deadline was <strong>4:15 PM</strong> and your attendance is still missing.</p>
 
               <p style='font-size: 16px;'>Please check in as soon as possible or contact your admin if you're facing any issues.</p>
 
