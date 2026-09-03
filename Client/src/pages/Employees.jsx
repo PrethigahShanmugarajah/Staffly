@@ -1,4 +1,3 @@
-// Client / src / pages / Employees.jsx
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Search, X } from "lucide-react";
 import { DEPARTMENTS } from "../constants/department";
@@ -18,23 +17,6 @@ const Employees = () => {
   const [selectedDept, setSelectedDept] = useState("");
   const [editEmployee, setEditEmployee] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-
-  // const fetchEmployees = useCallback(async () => {
-  //   try {
-  //     const url = selectedDept
-  //       ? `/api/employees?department=${selectedDept}`
-  //       : "/api/employees";
-
-  //     console.log("Selected Department:", selectedDept);
-  //     console.log("Employees API URL:", url);
-  //     const res = await api.get(url);
-  //     setEmployees(res.data.result);
-  //   } catch (error) {
-  //     console.error("Failed to fetch employees");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, [selectedDept]);
 
   const fetchEmployees = useCallback(async () => {
     try {
@@ -60,20 +42,7 @@ const Employees = () => {
     <div className="animate-fade-in">
       {/* -------- Header -------- */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-        {/* <div>
-          <h1 className="page-title">Employees</h1>
-
-          <p className="page-subtitle">Manage your team members</p>
-        </div> */}
-
         <PageHeader title="Employees" subtitle="Manage your team members" />
-
-        {/* <button
-          onClick={() => setShowCreateModal(true)}
-          className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center"
-        >
-          <Plus size={16} /> Add Employee
-        </button> */}
 
         <Button
           onClick={() => setShowCreateModal(true)}
@@ -86,16 +55,6 @@ const Employees = () => {
       {/* -------- Search Bar -------- */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <div className="relative flex-2">
-          {/* <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-
-          <input
-            type="text"
-            placeholder="Search employees..."
-            className="w-full pl-10!"
-            onChange={(e) => setSearch(e.target.value)}
-            value={search}
-          /> */}
-
           <InputField
             type="text"
             placeholder="Search employees..."
@@ -106,19 +65,6 @@ const Employees = () => {
             inputClassName="pl-10!"
           />
         </div>
-
-        {/* <select
-          value={selectedDept}
-          onChange={(e) => setSelectedDept(e.target.value)}
-          className="max-w-40"
-        >
-          <option value="">All Departments</option>
-          {DEPARTMENTS.map((deptName) => (
-            <option key={deptName} value={deptName}>
-              {deptName}
-            </option>
-          ))}
-        </select> */}
 
         <SelectInput
           size="m"
@@ -137,10 +83,6 @@ const Employees = () => {
 
       {/* -------- Employee Cards -------- */}
       {loading ? (
-        // <div className="flex justify-center p-12">
-        //   <div className="animate-spin h-8 w-8 border-2 border-indigo-600 border-t-transparent rounded-full" />
-        // </div>
-
         <Loading size="xl" />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
@@ -184,13 +126,6 @@ const Employees = () => {
                 </p>
               </div>
 
-              {/* <button
-                onClick={() => setShowCreateModal(false)}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-5 h-5" />
-              </button> */}
-
               <Button
                 onClick={() => setShowCreateModal(false)}
                 variant="ghost"
@@ -232,13 +167,6 @@ const Employees = () => {
                   Update employee details
                 </p>
               </div>
-
-              {/* <button
-                onClick={() => setShowCreateModal(false)}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-5 h-5" />
-              </button> */}
 
               <Button
                 onClick={() => setEditEmployee(null)}

@@ -1,4 +1,3 @@
-// Client / src / components / Attendance / AttendanceHistory.jsx
 import {
   getDayTypeDisplay,
   getWorkingHoursDisplay,

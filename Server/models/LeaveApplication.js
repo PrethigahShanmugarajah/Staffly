@@ -1,4 +1,3 @@
-// Server / models / LeaveApplication.js
 import mongoose from "mongoose";
 
 const leaveApplicationSchema = new mongoose.Schema(

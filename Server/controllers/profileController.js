@@ -1,4 +1,3 @@
-// Server / controllers / profileController.js
 import Employee from "../models/Employee.js";
 
 /* -------- Get Profile -------- */
@@ -11,9 +10,6 @@ export const getProfile = async (req, res) => {
       return res.status(200).json({
         success: true,
         message: "Profile retrieved successfully.",
-        // firstName: "Admin",
-        // lastName: "",
-        // email: session.email,
         profile: {
           firstName: "Admin",
           lastName: "",
@@ -65,7 +61,6 @@ export const updateProfile = async (req, res) => {
       });
     }
 
-    // await Employee.findByIdAndUpdate(employee._id, { bio: req.body.bio });
     const updatedEmployee = await Employee.findByIdAndUpdate(
       employee._id,
       { bio: req.body.bio },
@@ -75,7 +70,6 @@ export const updateProfile = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Profile updated successfully.",
-      // employee,
       employee: updatedEmployee,
     });
   } catch (error) {

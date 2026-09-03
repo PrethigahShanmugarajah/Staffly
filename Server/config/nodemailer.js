@@ -1,4 +1,3 @@
-// Server / config / nodemailer.js
 import { createTransport } from "nodemailer";
 
 /* -------- Create a Transporter using SMTP -------- */
@@ -11,6 +10,7 @@ const transporter = createTransport({
   },
 });
 
+/* -------- Send an email using the transporter -------- */
 const sendEmail = async ({ to, subject, body }) => {
   const response = await transporter.sendMail({
     from: process.env.SENDER_EMAIL,

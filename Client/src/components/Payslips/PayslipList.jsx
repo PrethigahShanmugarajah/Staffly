@@ -1,4 +1,3 @@
-// Client / src / components / Payslips / PayslipList.jsx
 import { format } from "date-fns";
 import { useAppContext } from "../../context/appContext";
 import { Download } from "lucide-react";
@@ -61,17 +60,6 @@ const PayslipList = ({ payslips, isAdmin }) => {
                     </td>
 
                     <td className="px-6 py-4 text-center">
-                      {/* <button
-                        onClick={() =>
-                          window.open(
-                            `/print/payslips/${payslip._id || payslip.id}`,
-                          )
-                        }
-                        className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded text-sky-600 bg-sky-50 hover:bg-sky-100 transition-colors ring-1 ring-sky-600/10"
-                      >
-                        <Download className="w-3 h-3 mr-1.5" /> Download
-                      </button> */}
-
                       <Button
                         onClick={() =>
                           window.open(

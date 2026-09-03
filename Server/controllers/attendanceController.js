@@ -1,4 +1,3 @@
-// Server / controllers / attendanceController.js
 import Employee from "../models/Employee.js";
 import Attendance from "../models/Attendance.js";
 import { inngest } from "../inngest/index.js";

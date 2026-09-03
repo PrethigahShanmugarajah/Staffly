@@ -1,4 +1,4 @@
-// Client / src / components / Sidebar.jsx
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -25,17 +25,6 @@ const Sidebar = () => {
 
   const { user, loading, logout } = useAppContext();
 
-  // useEffect(() => {
-  //   api
-  //     .get("/api/profile", {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then(({ data }) => {
-  //       if (data.firstName)
-  //         setUserName(`${data?.firstName} ${data?.lastName || ""}`.trim());
-  //     });
-  // }, [token]);
-
   useEffect(() => {
     fetchProfileService().then((data) => {
       const firstName = data?.profile?.firstName || data?.firstName;
@@ -50,7 +39,6 @@ const Sidebar = () => {
 
   /* -------- Close Mobile Sidebar on route Change -------- */
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileOpen(false);
   }, [pathname]);
 
@@ -91,12 +79,6 @@ const Sidebar = () => {
           </div>
 
           {/* -------- Close Button on Mobile -------- */}
-          {/* <button
-            onClick={() => setMobileOpen(false)}
-            className="lg:hidden text-gray-400 hover:text-white p-1"
-          >
-            <XIcon size={20} />
-          </button> */}
           <Button
             type="button"
             variant="ghost"
@@ -184,14 +166,6 @@ const Sidebar = () => {
 
       {/* -------- Logout -------- */}
       <div className="p-3 border-t border-white/6">
-        {/* <button
-          onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-md text-[13px] font-medium text-gray-400 hover:text-red-400 hover:bg-red-500/8 transition-all duration-150"
-        >
-          <LogOutIcon className="w-4.25 h-4.25" />
-          <span>Logout</span>
-        </button> */}
-
         <Button
           type="button"
           variant="ghost"
@@ -208,13 +182,6 @@ const Sidebar = () => {
   return (
     <>
       {/* -------- Mobile Hamburger Button -------- */}
-      {/* <button
-        onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-gray-900 text-white rounded-lg shadow-lg border border-white/10"
-      >
-        <MenuIcon size={20} />
-      </button> */}
-
       <Button
         type="button"
         variant="primary"

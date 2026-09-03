@@ -1,4 +1,3 @@
-// Server / controllers / authController.js
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
@@ -102,13 +101,6 @@ export const changePassword = async (req, res) => {
     const session = req.session;
 
     const { currentPassword, newPassword } = req.body;
-
-    // if (!currentPassword || !newPassword) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Both current and new passwords are required.",
-    //   });
-    // }
 
     if (!currentPassword) {
       return res.status(400).json({

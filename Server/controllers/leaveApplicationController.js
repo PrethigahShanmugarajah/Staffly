@@ -1,4 +1,3 @@
-// Server / controllers / leaveApplicationController.js
 import { inngest } from "../inngest/index.js";
 import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/LeaveApplication.js";
@@ -26,13 +25,6 @@ export const createLeave = async (req, res) => {
     }
 
     const { type, startDate, endDate, reason } = req.body;
-
-    // if (!type || !startDate || !endDate || !reason) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Please provide all required leave application fields.",
-    //   });
-    // }
 
     if (!type) {
       return res.status(400).json({

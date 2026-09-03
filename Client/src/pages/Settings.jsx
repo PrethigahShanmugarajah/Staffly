@@ -1,4 +1,3 @@
-// Client / src / pages / Settings.jsx
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { Lock } from "lucide-react";
@@ -15,18 +14,6 @@ const Settings = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   const { user } = useAppContext();
-
-  // const fetchProfile = async () => {
-  //   try {
-  //     const res = await api.get("/api/profile");
-  //     const profile = res.data;
-  //     if (profile) setProfile(profile);
-  //   } catch (error) {
-  //     toast.error(error?.response?.data?.error || error?.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const fetchProfile = async () => {
     try {
@@ -45,16 +32,6 @@ const Settings = () => {
 
   return (
     <div className="animate-fade-in">
-      {/* <div className="mb-8">
-        <h1 className="text-2xl font-medium text-gray-900 tracking-tight">
-          Settings
-        </h1>
-
-        <p className="text-gray-500 text-sm mt-1">
-          Manage your account and preferences
-        </p>
-      </div> */}
-
       <PageHeader
         title="Settings"
         subtitle="Manage your account and preferences"
@@ -65,7 +42,7 @@ const Settings = () => {
       )}
 
       {/* -------- Change Password Trigger -------- */}
-      <div className="card max-w-md p-6 flex items-center justify-between">
+      <div className="bg-white rounded-lg border border-gray-200/70 max-w-md p-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2.5 bg-gray-100 rounded-lg">
             <Lock className="w-5 h-5 text-gray-600" />
@@ -79,13 +56,6 @@ const Settings = () => {
             </p>
           </div>
         </div>
-
-        {/* <button
-          onClick={() => setShowPasswordModal(true)}
-          className="bg-white text-gray-700 border border-gray-200 px-5 py-2.5 rounded-md text-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 text-sm"
-        >
-          Change
-        </button> */}
 
         <Button
           onClick={() => setShowPasswordModal(true)}

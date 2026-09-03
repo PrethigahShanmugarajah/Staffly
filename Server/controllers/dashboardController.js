@@ -1,4 +1,3 @@
-// Server / controllers / dashboardController.js
 import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/LeaveApplication.js";
 import { DEPARTMENTS } from "../constants/department.js";
@@ -53,7 +52,6 @@ export const getDashboard = async (req, res) => {
               $gte: new Date(today.getFullYear(), today.getMonth(), 1),
               $lt: new Date(today.getFullYear(), today.getMonth() + 1, 1),
             },
-            // }).LeaveApplication.countDocuments({
           }),
           LeaveApplication.countDocuments({
             employeeId: employee._id,

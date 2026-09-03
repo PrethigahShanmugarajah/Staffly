@@ -1,4 +1,3 @@
-// Server / routes / attendanceRoutes.js
 import { Router } from "express";
 import {
   clockInOut,

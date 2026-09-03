@@ -1,4 +1,3 @@
-// Client / src / components / Employee / EmployeeCard.jsx
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Button from "../Button";
 import { useState } from "react";
@@ -9,29 +8,9 @@ const EmployeeCard = ({ employee, onDelete, onEdit }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
-  // const handleDelete = async () => {
-  //   if (!confirm("Are you sure want o delete this employee?")) return;
-  // };
-
   const handleDelete = async () => {
     setShowDeletePopup(true);
   };
-
-  // const handleConfirmDelete = async () => {
-  //   setDeleteLoading(true);
-
-  //   try {
-  //     await api.delete(`/api/employees/${employee.id}`);
-
-  //     setShowDeletePopup(false);
-  //     onDelete();
-  //   } catch (error) {
-  //     toast.error(error.response?.data?.error || error.message);
-  //   } finally {
-  //     setDeleteLoading(false);
-  //     setShowDeletePopup(false);
-  //   }
-  // };
 
   const handleConfirmDelete = async () => {
     setDeleteLoading(true);
@@ -73,13 +52,6 @@ const EmployeeCard = ({ employee, onDelete, onEdit }) => {
 
       {!employee.isDeleted && (
         <div className="absolute inset-0 bg-linear-to-t from-teal-700/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6 gap-3">
-          {/* <button
-            onClick={() => onEdit(employee)}
-            className="p-2.5 bg-white/90 backdrop-blur-sm text-gray-700 hover:text-teal-600 rounded-xl shadow-lg transition-all hover:scale-105"
-          >
-            <PencilIcon className="w-4 h-4" />
-          </button> */}
-
           <Button
             onClick={() => onEdit(employee)}
             variant="ghost"
@@ -89,13 +61,6 @@ const EmployeeCard = ({ employee, onDelete, onEdit }) => {
             iconLeft={<PencilIcon className="w-4 h-4" />}
             className="p-2.5! bg-white/90 backdrop-blur-sm! text-gray-700! hover:text-teal-600! shadow-lg transition-all hover:scale-105"
           />
-
-          {/* <button
-            onClick={handleDelete}
-            className="p-2.5 bg-white/90 backdrop-blur-sm text-gray-700 hover:text-red-600 rounded-xl shadow-lg transition-all hover:scale-105"
-          >
-            <Trash2Icon className="w-4 h-4" />
-          </button> */}
 
           <Button
             onClick={handleDelete}

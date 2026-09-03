@@ -1,4 +1,3 @@
-// Client / src / components / Settings / ProfileForm.jsx
 import { Save, User } from "lucide-react";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
@@ -20,7 +19,6 @@ const ProfileForm = ({ initialData, onSuccess }) => {
 
     const formData = new FormData(e.currentTarget);
     try {
-      // await api.put("/api/profile", formData);
       await updateProfileService(formData);
       onSuccess?.();
     } finally {
@@ -39,19 +37,6 @@ const ProfileForm = ({ initialData, onSuccess }) => {
 
       <div className="space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Name
-            </label>
-
-            <input
-              type="text"
-              disabled
-              value={`${initialData?.firstName || ""} ${initialData?.lastName || ""}`}
-              className="bg-gray-50 text-gray-400 cursor-not-allowed"
-            />
-          </div> */}
-
           <InputField
             label="Name"
             name="name"
@@ -63,19 +48,6 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             inputClassName="bg-gray-50! text-gray-400! cursor-not-allowed!"
           />
 
-          {/* <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
-
-            <input
-              type="email"
-              disabled
-              value={initialData?.email || ""}
-              className="bg-gray-50 text-gray-400 cursor-not-allowed"
-            />
-          </div> */}
-
           <InputField
             label="Email"
             name="email"
@@ -86,19 +58,6 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             size="xs"
             inputClassName="bg-gray-50! text-gray-400! cursor-not-allowed!"
           />
-
-          {/* <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Position
-            </label>
-
-            <input
-              type="text"
-              disabled
-              value={initialData?.position || ""}
-              className="bg-gray-50 text-gray-400 cursor-not-allowed"
-            />
-          </div> */}
 
           <div className="sm:col-span-2">
             <InputField
@@ -116,18 +75,6 @@ const ProfileForm = ({ initialData, onSuccess }) => {
 
         {!isAdmin && (
           <div>
-            {/* <label className="block text-sm font-medium text-gray-700 mb-2">
-              Bio
-            </label>
-
-            <textarea
-              disabled={initialData?.isDeleted}
-              name="bio"
-              defaultValue={initialData?.bio || ""}
-              placeholder="Write your brief bio..."
-              className={`resize-none ${initialData?.isDeleted ? "bg-gray-50 text-gray-400 cursor-not-allowed" : ""}`}
-            /> */}
-
             <TextAreaField
               label="Bio"
               name="bio"
@@ -162,15 +109,6 @@ const ProfileForm = ({ initialData, onSuccess }) => {
           </div>
         ) : (
           <div className="flex justify-end pt-2">
-            {/* <button
-              type="submit"
-              disabled={loading}
-              className="bg-linear-to-r from-teal-600 to-teal-500 text-white px-5 py-2.5 rounded-md text-sm hover:from-teal-700 hover:to-teal-600 transition-all duration-200 shadow-md shadow-teal-500/25 active:scale-[0.98] flex items-center gap-2 justify-center w-full sm:w-auto"
-            >
-              {loading ? <ClipLoader size={20} color="#FFFFFF" /> : <Save />}{" "}
-              Save Changes
-            </button> */}
-
             <Button
               type="submit"
               disabled={loading}

@@ -1,4 +1,3 @@
-// Client / src / components / Employee / EmployeeForm.jsx
 import { useState } from "react";
 import { useAppContext } from "../../context/appContext";
 import { DEPARTMENTS } from "../../constants/department";
@@ -32,12 +31,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
     }
 
     try {
-      // const url = isEditMode
-      //   ? `/api/employees/${initialData.id}`
-      //   : "/api/employees";
-      // const method = isEditMode ? "put" : "post";
-      // await api[method](url, formData);
-      // onSuccess ? onSuccess() : navigate("/employees");
       if (isEditMode) {
         await updateEmployeeService(initialData.id, formData);
       } else {
@@ -62,17 +55,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm text-gray-700">
-          {/* <div>
-            <label className="block mb-2">First Name</label>
-
-            <input
-              type="text"
-              name="firstName"
-              required
-              defaultValue={initialData?.firstName}
-            />
-          </div> */}
-
           <InputField
             label="First Name"
             name="firstName"
@@ -83,17 +65,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
             labelPosition="top"
             defaultValue={initialData?.firstName}
           />
-
-          {/* <div>
-            <label className="block mb-2">Last Name</label>
-
-            <input
-              type="text"
-              name="lastName"
-              required
-              defaultValue={initialData?.lastName}
-            />
-          </div> */}
 
           <InputField
             label="Last Name"
@@ -106,17 +77,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
             defaultValue={initialData?.lastName}
           />
 
-          {/* <div>
-            <label className="block mb-2">Phone Number</label>
-
-            <input
-              type="number"
-              name="phone"
-              required
-              defaultValue={initialData?.phone}
-            />
-          </div> */}
-
           <InputField
             label="Phone Number"
             name="phone"
@@ -127,21 +87,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
             labelPosition="top"
             defaultValue={initialData?.phone}
           />
-
-          {/* <div>
-            <label className="block mb-2">Join Date</label>
-
-            <input
-              type="date"
-              name="joinDate"
-              required
-              defaultValue={
-                initialData?.joinDate
-                  ? new Date(initialData.joinDate).toISOString().split("T")[0]
-                  : ""
-              }
-            />
-          </div> */}
 
           <InputField
             label="Join Date"
@@ -158,16 +103,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
           />
 
           <div className="sm:col-span-2">
-            {/* <label className="block mb-2">Bio (Optional)</label>
-
-            <textarea
-              name="bio"
-              defaultValue={initialData?.bio}
-              rows={3}
-              className="resize-none"
-              placeholder="Brief description..."
-            /> */}
-
             <TextAreaField
               name="bio"
               size="s"
@@ -188,21 +123,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm text-gray-700">
           <div>
-            {/* <label className="block mb-2">Department</label>
-
-            <select
-              name="department"
-              defaultValue={initialData?.department || ""}
-            >
-              <option value="">Select Department</option>
-
-              {DEPARTMENTS.map((deptName) => (
-                <option key={deptName} value={deptName}>
-                  {deptName}
-                </option>
-              ))}
-            </select> */}
-
             <SelectInput
               label="Department"
               name="department"
@@ -217,17 +137,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
             />
           </div>
 
-          {/* <div>
-            <label className="block mb-2">Position</label>
-
-            <input
-              type="text"
-              name="position"
-              required
-              defaultValue={initialData?.position}
-            />
-          </div> */}
-
           <InputField
             label="Position"
             name="position"
@@ -238,19 +147,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
             labelPosition="top"
             defaultValue={initialData?.position}
           />
-
-          {/* <div>
-            <label className="block mb-2">Basic Salary</label>
-
-            <input
-              type="number"
-              name="basicSalary"
-              required
-              min="0"
-              step="0.01"
-              defaultValue={initialData?.basicSalary || 0}
-            />
-          </div> */}
 
           <InputField
             label="Basic Salary"
@@ -265,19 +161,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
             defaultValue={initialData?.basicSalary || 0}
           />
 
-          {/* <div>
-            <label className="block mb-2">Allowances</label>
-
-            <input
-              type="number"
-              name="allowances"
-              required
-              min="0"
-              step="0.01"
-              defaultValue={initialData?.allowances || 0}
-            />
-          </div> */}
-
           <InputField
             label="Allowances"
             name="allowances"
@@ -290,19 +173,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
             labelPosition="top"
             defaultValue={initialData?.allowances || 0}
           />
-
-          {/* <div>
-            <label className="block mb-2">Deductions</label>
-
-            <input
-              type="number"
-              name="deductions"
-              required
-              min="0"
-              step="0.01"
-              defaultValue={initialData?.deductions || 0}
-            />
-          </div> */}
 
           <InputField
             label="Deductions"
@@ -319,16 +189,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
 
           {isEditMode && (
             <div>
-              {/* <label className="block mb-2">Status</label>
-
-              <select
-                name="employmentStatus"
-                defaultValue={initialData?.employmentStatus}
-              >
-                <option value="ACTIVE">Active</option>
-                <option value="INACTIVE">Inactive</option>
-              </select> */}
-
               <SelectInput
                 label="Status"
                 name="employmentStatus"
@@ -353,15 +213,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm text-gray-700">
           <div className="sm:col-span-2">
-            {/* <label className="block mb-2">Work Email</label>
-
-            <input
-              type="email"
-              name="email"
-              required
-              defaultValue={initialData?.email}
-            /> */}
-
             <InputField
               label="Work Email"
               name="email"
@@ -376,10 +227,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
 
           {!isEditMode && (
             <div>
-              {/* <label className="block mb-2">Temporary Password</label>
-
-              <input type="password" name="password" required /> */}
-
               <InputField
                 label="Temporary Password"
                 name="password"
@@ -407,14 +254,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
 
           {isEditMode && (
             <div>
-              {/* <label className="block mb-2">Change Password(Optional)</label>
-
-              <input
-                type="password"
-                name="password"
-                placeholder="Leave blank to keep current"
-              /> */}
-
               <InputField
                 label="Change Password (Optional)"
                 name="password"
@@ -440,16 +279,6 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
           )}
 
           <div>
-            {/* <label className="block mb-2">System Role</label>
-
-            <select
-              name="role"
-              defaultValue={initialData?.user?.role || "EMPLOYEE"}
-            >
-              <option value="EMPLOYEE">Employee</option>
-              <option value="ADMIN">Admin</option>
-            </select> */}
-
             <SelectInput
               label="System Role"
               name="role"
@@ -467,30 +296,12 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
 
       {/* -------- Buttons -------- */}
       <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-2">
-        {/* <button
-          type="button"
-          className="bg-white text-gray-700 border border-gray-200 px-5 py-2.5 rounded-md text-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200"
-          onClick={() => (onCancel ? onCancel() : navigate(-1))}
-        >
-          Cancel
-        </button> */}
-
         <Button
           type="button"
           variant="secondary"
           onClick={() => (onCancel ? onCancel() : navigate(-1))}
           text="Cancel"
         />
-
-        {/* <button
-          type="submit"
-          disabled={loading}
-          className="bg-linear-to-r from-teal-600 to-teal-500 text-white px-5 py-2.5 rounded-md text-sm hover:from-teal-700 hover:to-teal-600 transition-all duration-200 shadow-md shadow-teal-500/25 active:scale-[0.98] flex items-center justify-center"
-        >
-          {loading && <ClipLoader size={20} color="#FFFFFF" />}
-
-          {isEditMode ? "Update Employee" : "Create Employee"}
-        </button> */}
 
         <Button
           type="submit"

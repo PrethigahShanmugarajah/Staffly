@@ -1,4 +1,3 @@
-// Server / routes / payslipRoutes.js
 import { Router } from "express";
 import {
   createPayslip,

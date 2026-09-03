@@ -1,5 +1,4 @@
-// Client / src / utils / attendanceUtils.js
-
+/* -------- Get the display style and label for attendance day type -------- */
 export function getDayTypeDisplay(record) {
   if (record.dayType) {
     const map = {
@@ -8,18 +7,23 @@ export function getDayTypeDisplay(record) {
       "Half Day": "bg-orange-50 text-orange-700 ring-1 ring-orange-600/10",
       "Short Day": "bg-red-50 text-red-700 ring-1 ring-red-600/10",
     };
+
     return {
       label: record.dayType,
       className: map[record.dayType] || "bg-gray-100 text-gray-600",
     };
   }
+
   if (record.checkIn && !record.checkOut) {
     return { label: "In Progress", className: "bg-teal-100 text-teal-700" };
   }
+
   return { label: "—", className: "" };
 }
 
+/* -------- Get working hours display - if still checked in, calculate live hours -------- */
 export function getWorkingHoursDisplay(record) {
+  /* -------- If working hours are already saved in the database, display them -------- */
   if (record.workingHours != null) {
     const hrs = Math.floor(record.workingHours);
     const mins = Math.round((record.workingHours - hrs) * 60);
