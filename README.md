@@ -294,9 +294,9 @@ When deploying, configure all required environment variables in the hosting plat
 
 # 👨‍💻 Author
 
-**Prethigah Shanmugarajah (2020/2021)**
-Department of Software Engineering
-Faculty of Computing
-Sabaragamuwa University of Sri Lanka
+**Prethigah Shanmugarajah (2020/2021)** </br>
+Department of Software Engineering </br>
+Faculty of Computing </br>
+Sabaragamuwa University of Sri Lanka.
 
 ---
